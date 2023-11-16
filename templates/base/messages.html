@@ -1,0 +1,25 @@
+{% comment %} {% if messages %}
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container top-0 end-0 p-3">
+    {% for message in messages %}
+        <div class="toast align-items-center {% if message.tags %}text-bg-{{ message.tags }}{% endif %} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %} {% endcomment %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

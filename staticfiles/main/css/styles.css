@@ -1,0 +1,68 @@
+*{
+    box-sizing: border-box;
+}
+#header{
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+.nav-header{
+    display: flex;
+    flex-direction: row;
+    padding: 6px 10px;
+    background: linear-gradient(90deg,rgb(80, 23, 113), #A626D3);
+    background-color: #d150ff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px;
+    height: 50px;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.nav-header > div> img{
+    height: 100%;
+    max-width: 40px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.nav-header > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+}
+.nav-header>div > h2 {
+    margin: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 30px;
+}
+.nav-header > p {
+    margin-right: 8px;
+    align-items: center;
+    justify-content: center;
+}
+.btn,.form-check-input,.form-select,.input-group-text, .form-control{
+	border-radius: 2px !important;
+}
+.btn.btn-default {
+    background: #660076 !important;
+    border: 1px solid #660076 !important;
+    color: #fff !important;
+}
+@media screen and (max-width: 600px) {
+    .nav-header > p {
+        font-size: small;
+    }
+    .nav-header>div > h2 {
+        font-size: 20px;
+    }
+    .nav-header > div> img{
+        margin-right: 7px;
+    }
+}
