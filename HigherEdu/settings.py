@@ -125,6 +125,8 @@ MESSAGE_TAGS = {
     messages.ERROR :'danger'
 }
 
+LOGIN_URL = 'accounts-login'
+
 # Email Configure
 SERVER_EMAIL = config('EMAIL_FROM_EMAIL')
 EMAIL_HOST = config('EMAIL_HOST')

@@ -40,3 +40,6 @@ class CountryList(View):
 
         filtered_colleges = [entry['name'] for entry in data if term.lower() in entry['name'].lower()]
         return JsonResponse(filtered_colleges, safe=False)
+    
+def TermsConds(request):
+    return render(request,'utils/terms_conds.html')

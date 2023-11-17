@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,BaseUserManager,Permission
+from django.dispatch.dispatcher import receiver
+from django.db.models.signals import post_save
 
 class UserType(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -26,15 +28,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     username = None
-    usn = models.CharField(max_length=100, unique=True,null=True,blank=True)
-    full_name = models.CharField(max_length=255,null=True,blank=True)
     email = models.EmailField(unique=True)
-    mobile_no = models.CharField(max_length=15,null=True,unique=True,blank=True)
-    country = models.CharField(max_length=255,null=True,blank=True)
-    course = models.CharField(max_length=255,null=True,blank=True)
-    graduation_year = models.IntegerField(null=True,blank=True)
-    abroad_year = models.IntegerField(null=True,blank=True)
-    abroad_season = models.CharField(max_length=100,null=True,blank=True)
     is_completed = models.BooleanField(default=False)
     user_type = models.ForeignKey(UserType, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -45,3 +39,30 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=255, null=True, blank=True)
+    mobile_no = models.CharField(max_length=15, null=True, blank=True)
+    usn = models.CharField(max_length=100, null=True, blank=True)
+    college = models.CharField(max_length=255, blank=True, null=True)
+    graduation_year = models.IntegerField(null=True, blank=True)
+    country = models.CharField(max_length=255, null=True, blank=True)
+    course = models.CharField(max_length=255, null=True, blank=True)
+    abroad_year = models.IntegerField(null=True, blank=True)
+    abroad_season = models.CharField(max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.email
+    
+@receiver(post_save, sender=CustomUser)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        profile = UserProfile.objects.create(user=instance)
+        profile.save()

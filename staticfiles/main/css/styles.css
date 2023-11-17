@@ -55,6 +55,35 @@
     border: 1px solid #660076 !important;
     color: #fff !important;
 }
+.check_box_nvs{
+    padding:10px;
+    border-color:#b1b3b5;
+    margin-right: 15px;
+}
+.check_box_nvs:checked{
+    background-color:#660076;
+    border-color: #660076;
+}
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 25px 0;
+}
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 5;
+    height: 1px;
+}
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center;
+}
+.custom-tooltip {
+    --bs-tooltip-bg: #660086;
+    --bs-tooltip-color:white;
+}
 @media screen and (max-width: 600px) {
     .nav-header > p {
         font-size: small;

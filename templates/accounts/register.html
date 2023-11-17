@@ -17,17 +17,17 @@
         <div class="col-md-12">
           <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="#"><img
               src="https://img.icons8.com/color/16/000000/google-logo.png"> Signup Using Google</a>
-              <p class="text-center m-0 p-0 mt-1">Already have an account? <a href="#">Login</a></p>
+              <p class="text-center m-0 p-0 mt-1">Already have an account? <a href="{% url 'accounts-login' %}">Login</a></p>
         </div>
       </div>
       <div class="row mt-3 p-1">
-        <img src="https://dummyimage.com/300x200/000000/ffffff.png" alt="">
+        <img src="https://dummyimage.com/300x200/808080/ffffff.png" alt="">
       </div>
     </div>
     <div class="row small-screen">
       <div class="col-md-8 justify-content-center">
         <div class="card m-0">
-          <div class="card-body m-0 p-0">
+          <div class="card-body m-0 p-1">
             <img class="img-fluid" height="90" width="90"
         src="{% static 'main/img/register_page_logo.png' %}"
         alt="">
@@ -35,7 +35,7 @@
               <div class="col-md-12">
                 <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="#"><img
                     src="https://img.icons8.com/color/16/000000/google-logo.png"> Signup Using Google</a>
-                    <p class="text-center m-0 p-0 mt-1">Already have an account? <a href="#">Login</a></p>
+                    <p class="text-center m-0 p-0 mt-1">Already have an account? <a href="{% url 'accounts-login' %}">Login</a></p>
               </div>
             </div>
           </div>
@@ -78,25 +78,41 @@
           </div>
 
           <div class="row mt-1">
+            <label class="col-sm-3 col-form-label" for="inputfullname">Gender <span class="text-danger">*</span></label>
+            <div class="col-sm-9 d-flex">
+              <div class="form-check my-1">
+                <input class="form-check-input" type="radio" name="gender" id="inputgender_M" value="Male" required {% if FieldValues.gender == 'Male' %}checked{% endif %}>
+                <label class="form-check-label" for="inputgender_M">
+                  Male
+                </label>
+              </div>
+              <div class="form-check mx-3 my-1">
+                <input class="form-check-input" type="radio" name="gender" id="inputgender_F" value="Female" required {% if FieldValues.gender == 'Female' %}checked{% endif %}>
+                <label class="form-check-label" for="inputgender_F">
+                  Female
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-1">
             <label for="inputmobile_no" class="col-sm-3 col-form-label">Mobile Number <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input required type="tel" class="form-control" name="mobile_no" id="inputmobile_no" maxlength="10"
-              placeholder="999-9999-999" value="{{ FieldValues.mobile_no }}">
+              <input required type="tel" class="form-control" name="mobile_no" id="inputmobile_no" maxlength="18"
+                value="{{ FieldValues.mobile_no_full }}">
             </div>
           </div>
 
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputpassword">Password <span class="text-danger">*</span> 
-              <a
-              href="#"
-                data-bs-toggle="tooltip" data-bs-placement="top"
-                data-bs-title="This top tooltip is themed via CSS variables."
-                >
-                <span class="badge rounded-pill text-bg-warning">i</span></a>
+              <span class="nvs-tooltip" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip" data-bs-title="<strong>★</strong> Password must contain atleast 8 characters." data-bs-html="true">
+                    <span class="badge rounded-pill text-bg-warning">i</span>
+                </span>
             </label>
             <div class="col-sm-9">
               <div class="input-group">
-                <input id="inputpassword" type="password" class="form-control" placeholder="Password" required>
+                <input id="inputpassword" type="password" class="form-control" placeholder="Password" required name="password">
                 <span class="input-group-text">
                   <i toggle="#inputpassword" class="fa fa-fw toggle-password fa-eye"></i>
                 </span>
@@ -117,15 +133,16 @@
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputcollege">College <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <select id="inputcollege" name="college" class="form-select">
+              <select id="inputcollege" name="college" class="form-select" required>
+                {% if FieldValues.college %}
+                  <option selected>{{FieldValues.college}}</option>
+                {% endif %}
               </select>
-              {% comment %} <input required type="text" name="college" placeholder="College / University" maxlength="15" class="form-control"
-              id="inputcollege" value="{{ FieldValues.college }}" /> {% endcomment %}
             </div>
           </div>
 
           <div class="row mt-1">
-            <label class="col-sm-3 col-form-label" for="inputgraduation">Graduation Year<span class="text-danger">*</span></label>
+            <label class="col-sm-3 col-form-label" for="inputgraduation">Graduation Year <span class="text-danger">*</span></label>
             <div class="col-sm-9">
               <input required type="number" min="1900" max="2099" step="1" name="graduation" placeholder="Year" maxlength="15" class="form-control"
               id="inputgraduation" value="{{ FieldValues.graduation }}" />
@@ -137,17 +154,18 @@
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputcountry">Country <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <select id="inputcountry" name="country" data-control="select2" class="form-select">
+              <select id="inputcountry" name="country" data-control="select2" class="form-select" required>
+                {% if FieldValues.country %}
+                  <option selected>{{FieldValues.country}}</option>
+                {% endif %}
               </select>
-              {% comment %} <input required type="text" name="country" placeholder="Country" maxlength="15" class="form-control"
-              id="inputcountry" value="{{ FieldValues.country }}" /> {% endcomment %}
             </div>
           </div>
 
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputcourse">Course <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <select id="inputcourse" name="course" data-control="select2" class="form-select">
+              <select id="inputcourse" name="course" data-control="select2" class="form-select" required>
                 <option></option>
                 <option>Undergraduate</option>
                 <option>Postgraduate</option>
@@ -160,7 +178,6 @@
                 <option>IB</option>
                 <option>IELTS at SI-UK</option>
                 <option>IGCSE</option>
-                <option>Other</option>
                 <option>Summer Course</option>
               </select>
             </div>
@@ -177,7 +194,7 @@
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputseason">Season <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <select id="inputseason" name="season" data-control="select2" class="form-select">
+              <select id="inputseason" name="season" data-control="select2" class="form-select" required>
                 <option></option>
                 <option value="fall">Fall Semester</option>
                 <option value="spring">Spring Semester</option>
@@ -189,9 +206,9 @@
 
           <div class="form-group mt-3">
             <div class="form-check">
-              <input class="form-check-input check_box_nvs" name="terms_cond" type="checkbox" id="gridCheck" {% if FieldValues.terms_cond == 'on' %}checked{% endif %}/>
+              <input required class="form-check-input check_box_nvs" name="terms_cond" type="checkbox" id="gridCheck" {% if FieldValues.terms_cond == 'on' %}checked{% endif %}/>
               <label class="form-check-label" for="gridCheck">
-                I agree all statements in <a target="_blank" href="#" class="text-body"><u>Terms of service</u></a>
+                I agree all statements in <a target="_blank" href="{% url 'utils-terms-conds' %}" class="text-body"><u>Terms of service</u></a>
               </label>
             </div>
           </div>
@@ -204,7 +221,7 @@
   </div>
   <div class="small-screen">
     <div class="row mt-1">
-      <img src="https://dummyimage.com/300x200/000000/ffffff.png" alt="">
+      <img src="https://dummyimage.com/300x200/808080/ffffff.png" alt="">
     </div>
   </div>
 </div>
@@ -213,17 +230,6 @@
 {% block scripts %}
 <script src="{% static 'accounts/js/email_auto_check.js' %}"></script>
 <script>
-    $(".toggle-password").click(function() {
-  
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    var input = $($(this).attr("toggle"));
-    if (input.attr("type") == "password") {
-      input.attr("type", "text");
-    } else {
-      input.attr("type", "password");
-    }
-  });
-
   $(document).ready(function () {
       function serverSideFiltering(params, callback) {
         console.log(params)
@@ -257,6 +263,7 @@
         placeholder: 'Search for College',
         tags: true,
       });
+
       $('#inputcountry').select2({
         theme: 'bootstrap-5',
         language: 'en',
@@ -276,12 +283,15 @@
         },
         placeholder: 'Select a Country',
       });
+
       $('#inputcourse').select2({
         theme: 'bootstrap-5',
         language: 'en',
-        minimumResultsForSearch: Infinity,
+        //minimumResultsForSearch: Infinity,
         placeholder: 'Type of Study',
+        tags:true,
       });
+
       $('#inputseason').select2({
         theme: 'bootstrap-5',
         language: 'en',
@@ -294,29 +304,23 @@
       $('.select2-container--default .select2-selection--single .select2-selection__rendered').addClass('form-control');
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+  const input = document.querySelector("#inputmobile_no");
+  window.intlTelInput(input, {
+    separateDialCode: true,
+    hiddenInput: "mobile_no_full",
+    preferredCountries: ["in"],
+    initialCountry: "auto",
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+  });
+</script>
 {% endblock scripts %}
 
 
 {% block styles %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
   <style>
-    .or-container {
-      align-items: center;
-      color: #ccc;
-      display: flex;
-      margin: 25px 0;
-  }
-  
-  .line-separator {
-      background-color: #ccc;
-      flex-grow: 5;
-      height: 1px;
-  }
-  
-  .or-label {
-      flex-grow: 1;
-      margin: 0 15px;
-      text-align: center;
-  }
   .btn-google {
     color: #545454;
     background-color: #ffffff;
@@ -327,15 +331,6 @@
   }
   .small-screen{
     display: none;
-  }
-  .check_box_nvs{
-    padding:10px;
-    border-color:#b1b3b5;
-    margin-right: 15px;
-  }
-  .check_box_nvs:checked{
-    background-color:#660076;
-    border-color: #660076;
   }
   @media screen and (max-width: 600px) {
     .large-screen{
