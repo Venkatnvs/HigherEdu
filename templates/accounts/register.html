@@ -7,7 +7,9 @@
     <div class="row large-screen">
       <img class="img-fluid" height="350" width="350"
         src="{% static 'main/img/register_page_logo.png' %}"
-        alt="">
+        alt=""
+        data-aos="zoom-out" data-aos-delay="100"
+        >
       <div class="or-container">
         <div class="line-separator"></div>
         <div class="or-label">or</div>
@@ -30,7 +32,8 @@
           <div class="card-body m-0 p-1">
             <img class="img-fluid" height="90" width="90"
         src="{% static 'main/img/register_page_logo.png' %}"
-        alt="">
+        alt=""
+        data-aos="zoom-out" data-aos-delay="100">
             <div class="row">
               <div class="col-md-12">
                 <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="#"><img
@@ -49,7 +52,7 @@
     </div>
   </div>
   <div class="col-md-8 justify-content-center">
-    <div class="card">
+    <div class="card"  data-aos="fade-left" data-aos-delay="50">
       <div class="card-title justify-content-center m-0 text-center p-2">
         <h3 class="m-0 p-0">Sign Up</h3>
       </div>
@@ -144,7 +147,7 @@
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputgraduation">Graduation Year <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input required type="number" min="1900" max="2099" step="1" name="graduation" placeholder="Year" maxlength="15" class="form-control"
+              <input required type="number" min="2000" max="2099" step="1" name="graduation" placeholder="Year" maxlength="15" class="form-control"
               id="inputgraduation" value="{{ FieldValues.graduation }}" />
             </div>
           </div>
@@ -186,7 +189,7 @@
           <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputabroad_year">Year of Study<span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input required type="number" min="1900" max="2099" step="1" name="abroad_year" placeholder="Year" maxlength="15" class="form-control"
+              <input required type="number" min="2000" max="2099" step="1" name="abroad_year" placeholder="Year" maxlength="15" class="form-control"
               id="inputabroad_year" value="{{ FieldValues.abroad_year }}" />
             </div>
           </div>
@@ -339,7 +342,7 @@
     .small-screen{
       display: block;
     }
-    .container{
+    #main > .container{
       padding: 1px !important;
     }
     .check_box_nvs{

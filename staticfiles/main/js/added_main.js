@@ -11,5 +11,25 @@ window.onload = () =>{
   const allToolTips  = document.querySelectorAll(".nvs-tooltip");
     allToolTips.forEach(tt => {
         new bootstrap.Tooltip(tt)
-    });
+  });
 }
+document.addEventListener('DOMContentLoaded', () => {
+  "use strict";
+  const preloader = document.querySelector('#preloader');
+  if (preloader) {
+    window.addEventListener('load', () => {
+      preloader.remove();
+    });
+  }
+  function aos_init() {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+  }
+  window.addEventListener('load', () => {
+    aos_init();
+  }); 
+});

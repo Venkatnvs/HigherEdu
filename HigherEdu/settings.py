@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     # Custom Apps
     'utils',
     'accounts',
+    'dashboard',
+    'ctm_admin',
 ]
 
 SITE_NAME = "HigherEdu"

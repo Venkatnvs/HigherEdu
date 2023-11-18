@@ -1,0 +1,14 @@
+{% extends 'ctm_admin/base/index.html' %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<div class="col-md-10">
+    <div class="row">
+        <div class="col-md-4">
+            {% include 'ctm_admin/_details/get_dashboard_card.html' with title="User Registrations" count=user_count color="default" icon="fa-user-plus" %}
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock content %}

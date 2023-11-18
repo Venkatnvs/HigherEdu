@@ -1,0 +1,15 @@
+{% load static %}
+<header id="header" class="header">
+    <nav class="nav-header header-nav">
+        <div class="text-light nav-main-b">
+            <a href="{% url 'ctm_admin-main' %}" class="logo">
+                <img src="{% static 'icons/logo.jpg' %}" alt="logo"/>
+                <h2>{{site_name}} <span class="text-light fs-4">ADMIN</span></h2>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div>
+        <div style="gap: 6px;" class="mx-1">
+            
+        </div>
+    </nav>
+</header>
