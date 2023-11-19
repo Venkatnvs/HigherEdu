@@ -109,3 +109,20 @@
         margin-right: 7px;
     }
 }
+.profile_pg .nav-borders .nav-link.active {
+    color: #831893;
+    border-bottom-color: #801192;
+    font-weight: 600;
+}
+.profile_pg .nav-borders .nav-link {
+    color: #6b6c6e;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

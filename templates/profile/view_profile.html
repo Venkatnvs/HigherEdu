@@ -1,0 +1,150 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block title %}
+Profile | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="col-md-12 profile_pg">
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="#">Profile</a>
+        <a class="nav-link" href="{% url 'dashboard-update-password' %}" >Security</a>
+        <a class="nav-link" href="#" >Notifications</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-md-5">
+            {% include 'profile/_details/side_profile_deatils.html' %}
+            <div class="large-screen">
+                <div class="row mt-3 p-1">
+                    <img src="https://dummyimage.com/300x200/808080/ffffff.png" alt="">
+                  </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="col">
+                <div class="card m-0">
+                    <div class="card-header m-0">
+                        <span>Account Details</span>
+                    </div>
+                    <div class="card-body">
+                        {% include 'profile/_details/account_update_dtls.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    function serverSideFiltering(params, callback) {
+      console.log(params)
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '{% url "utils-college-list" %}?q=' + params.data.term, true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          callback(data);
+        }
+      };
+      xhr.send();
+    }
+    $('#inputcollege').select2({
+      theme: 'bootstrap-5',
+      ajax: {
+        transport: serverSideFiltering,
+        processResults: function (data) {
+          return {
+            results: $.map(data, function(college) {
+                return {
+                    id: college,
+                    text: college
+                };
+            })
+          };
+        },
+        cache: true
+      },
+      minimumInputLength: 2,
+      placeholder: 'Search for College',
+      tags: true,
+    });
+
+    $('#inputcountry').select2({
+      theme: 'bootstrap-5',
+      language: 'en',
+      ajax: {
+        url: '{% url "utils-country-list" %}',
+        processResults: function (data) {
+          return {
+            results: $.map(data, function(country_name) {
+                return {
+                    id: country_name,
+                    text: country_name
+                };
+            })
+          };
+        },
+        cache: true
+      },
+      placeholder: 'Select a Country',
+    });
+
+    $('#inputcourse').select2({
+      theme: 'bootstrap-5',
+      language: 'en',
+      //minimumResultsForSearch: Infinity,
+      placeholder: 'Type of Study',
+      tags:true,
+    });
+
+    $('#inputseason').select2({
+      theme: 'bootstrap-5',
+      language: 'en',
+      minimumResultsForSearch: Infinity,
+      placeholder: 'Semesters',
+    });
+
+    $('.select2-container--bootstrap-5 .select2-selection--single').addClass('form-control');
+    $('.select2-container--default .select2-selection--single .select2-selection__arrow').addClass('btn btn-light');
+    $('.select2-container--default .select2-selection--single .select2-selection__rendered').addClass('form-control');
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+  const input = document.querySelector("#inputmobile_no");
+  window.intlTelInput(input, {
+    separateDialCode: true,
+    hiddenInput: "mobile_no_full",
+    nationalMode: false, 
+    preferredCountries: ["in"],
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+  });
+</script>
+{% endblock scripts %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+  <style>
+  .large-screen{
+    display: block;
+  }
+  .small-screen{
+    display: none;
+  }
+  @media screen and (max-width: 600px) {
+    .large-screen{
+      display: none;
+    }
+    .small-screen{
+      display: block;
+    }
+  }
+  </style>
+{% endblock styles %}

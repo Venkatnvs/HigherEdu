@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from .mixins import CheckAdminMixin
+from .decorators import check_admin_required
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from accounts.models import UserProfile,CustomUser
 import xlwt
@@ -8,6 +9,7 @@ import datetime
 from django.db.models import F,Value, CharField
 from django.db.models.functions import Cast, Coalesce, Concat
 
+@check_admin_required
 def Main(request):
     users = CustomUser.objects.filter(is_superuser=False)
     user_count = users.count()
@@ -16,8 +18,7 @@ def Main(request):
     }
     return render(request,'ctm_admin/index.html',context)
 
-
-class UsersListview(ListView):
+class UsersListview(CheckAdminMixin,ListView):
     model = UserProfile
     template_name = 'ctm_admin/allusers_list.html'
     paginate_by = 20
@@ -25,7 +26,7 @@ class UsersListview(ListView):
     def get_queryset(self):
         return UserProfile.objects.filter(user__is_superuser=False).order_by('created_at')
 
-
+@check_admin_required
 def UserDataExportExcel(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename=UserData'+str(datetime.datetime.now())+'.xls'
@@ -59,6 +60,7 @@ def UserDataExportExcel(request):
     wb.save(response)
     return response
 
+@check_admin_required
 def UserDataExportCsv(request):
     response = HttpResponse(content_type='text/csv')
     file_name = f'UserData{str(datetime.datetime.now())}.csv'

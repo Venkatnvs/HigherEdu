@@ -26,7 +26,7 @@
                   </li>
     
                   <li>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
+                    <a class="dropdown-item d-flex align-items-center" href="{% url 'dashboard-profile' %}">
                       <i class="bi bi-gear"></i>
                       <span>Account Settings</span>
                     </a>
@@ -57,11 +57,11 @@
                   </li>
     
                   <li>
-                    <a class="dropdown-item d-flex align-items-center" href="">
+                    <a class="dropdown-item d-flex align-items-center" href="#">
                       <i class="bi bi-box-arrow-right"></i>
                       <form action="{% url 'accounts-logout' %}" method="post">
                         {% csrf_token %}
-                        <input class="btn btn-sm" type="submit" value="Sign Out">
+                        <input class="btn btn-sm btn-default" type="submit" value="Sign Out">
                       </form>
                     </a>
                   </li>

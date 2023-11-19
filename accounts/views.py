@@ -127,7 +127,7 @@ class Login(View):
                     return HttpResponseRedirect(next)
                 messages.error(request, 'Account is not activated, Please check your email')
                 return redirect('accounts-login')
-            messages.error(request, 'Invalid credintails,Please check your email')
+            messages.error(request, 'Invalid credintails,Please check')
             return redirect('accounts-login')
         messages.error(request, 'Please fill all fields')
         return redirect('accounts-login')
