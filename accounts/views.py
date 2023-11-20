@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.shortcuts import render,redirect
 from django.views import View
 from django.contrib import messages
@@ -13,6 +13,9 @@ from django.urls import reverse
 from django.conf import settings
 from validate_email import validate_email
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from allauth.account.signals import user_signed_up, email_confirmed
+from django.dispatch import receiver
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 User = get_user_model()
 
@@ -70,7 +73,7 @@ class Registration(View):
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         link = reverse('accounts-activate', kwargs={'uidb64':uidb64, 'token':token_generater.make_token(user)})
         from_mail = config('FROM_MAIL')
-        activate_url = request_main+domain+link
+        activate_url = domain+link
         context_email_data = {
             'title':settings.SITE_NAME,
             'baseurl':domain+request_main,
@@ -159,11 +162,11 @@ class ForgetPassword(View):
             link = reverse('accounts-reset-user-password', kwargs={'uidb64':uidb64, 'token':PasswordResetTokenGenerator().make_token(user[0])})
             request_main = config('REQUEST')
             from_mail = config('FROM_MAIL')
-            reset_url = request_main+domain+link
+            reset_url = domain+link
             email_subject = f'Reset Password Link | {settings.SITE_NAME}'
             context_email_data = {
                     'title':settings.SITE_NAME,
-                    'baseurl':domain+request_main,
+                    'baseurl':domain,
                     'reset_url':reset_url,
                     'user_name':user[0].full_name,
                     'user_email':user[0].email,
@@ -216,3 +219,56 @@ class SetNewPassword(View):
 
         messages.error(request, 'Password Reset link Not Valid')
         return render(request, 'accounts/set_new_password.html', context)
+
+class CompleteSocialAccount(LoginRequiredMixin,View):
+    def get(self,request):
+        if request.user.is_completed:
+            messages.info(request,"Account already setup.")
+            return redirect("dashboard-home")
+        return render(request,"accounts/complete_social_account.html")
+    
+    def post(self,request):
+        email = request.POST['email']
+        gender = request.POST['gender']
+        mobile_no = request.POST['mobile_no']
+        mobile_no_full = request.POST['mobile_no_full']
+        usn_no = request.POST['usn_no']
+        college = request.POST['college']
+        graduation = request.POST['graduation']
+        country = request.POST['country']
+        course = request.POST['course']
+        abroad_year = request.POST['abroad_year']
+        season = request.POST['season']
+        context = {
+            'FieldValues':request.POST
+        }
+        if not (request.user.email == email):
+            return HttpResponseForbidden("You have no permission to change it.")
+        if len(mobile_no)>10:
+            messages.error(request, 'Invalid Mobile Number')
+            return render(request, 'accounts/complete_social_account.html', context)
+        try:
+            user = User.objects.get(email=email)
+        except Exception as e:
+            print(e)
+            return HttpResponseForbidden("User not found")
+        user.userprofile.gender = gender
+        user.userprofile.mobile_no = mobile_no_full
+        user.userprofile.usn = usn_no
+        user.userprofile.college = college
+        user.userprofile.graduation_year = graduation
+        user.userprofile.country = country
+        user.userprofile.course = course
+        user.userprofile.abroad_year = abroad_year
+        user.userprofile.abroad_season = season
+        user.userprofile.save()
+        user.is_completed = True
+        user.save()
+        messages.info(request, 'Account setup completed')
+        return redirect("dashboard-home")
+
+@receiver(user_signed_up)
+def user_signed_up_(request, user, **kwargs):
+    user.is_socialaccount = True
+    # Group.objects.get(name='Manager').user_set.add(user)
+    user.save()

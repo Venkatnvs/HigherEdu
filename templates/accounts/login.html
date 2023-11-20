@@ -1,5 +1,6 @@
 {% extends 'accounts/base.html' %}
 {% load static %}
+{% load socialaccount %}
 
 {% block title %}
 Login | {{site_name}}
@@ -20,7 +21,7 @@ Login | {{site_name}}
         </div>
         <div class="row">
           <div class="col-md-12">
-            <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="#"><img
+            <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="{% provider_login_url 'google' %}?next=/"><img
                 src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign in Using Google</a>
                 <p class="text-center m-0 p-0 mt-1">Don't have an account? <a href="{% url 'accounts-register' %}">Register</a></p>
           </div>
@@ -39,7 +40,7 @@ Login | {{site_name}}
           data-aos="zoom-out" data-aos-delay="100">
               <div class="row">
                 <div class="col-md-12">
-                  <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="#"><img
+                  <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="{% provider_login_url 'google' %}?next=/"><img
                       src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign in Using Google</a>
                       <p class="text-center m-0 p-0 mt-1">Don't have an account? <a href="{% url 'accounts-register' %}">Register</a></p>
                 </div>

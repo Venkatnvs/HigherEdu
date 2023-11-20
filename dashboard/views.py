@@ -6,13 +6,15 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.helpers import extract_first_last_name
 from django.contrib import messages
+from .mixins import CheckBasicAuthMixin
+from .decorators import check_basic_auth
 
-# @login_required
+@check_basic_auth
 def Home(request):
     return render(request,"dashboard/index.html")
 
 
-class ProfileUpdate(LoginRequiredMixin,View):
+class ProfileUpdate(CheckBasicAuthMixin,View):
     def get(self,request):
         user = UserProfile.objects.filter(user=request.user)
         if not user.exists():
@@ -61,7 +63,7 @@ class ProfileUpdate(LoginRequiredMixin,View):
         return redirect('dashboard-profile')
     
 
-class UpdatePassword(LoginRequiredMixin,View):
+class UpdatePassword(CheckBasicAuthMixin,View):
     def get(self,request):
         return render(request,'profile/update_password.html')
     

@@ -30,6 +30,7 @@ class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
     is_completed = models.BooleanField(default=False)
+    is_socialaccount = models.BooleanField(default=False)
     user_type = models.ForeignKey(UserType, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = CustomUserManager()
