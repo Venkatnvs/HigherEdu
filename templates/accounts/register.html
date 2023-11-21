@@ -188,6 +188,17 @@
           </div>
 
           <div class="row mt-1">
+            <label class="col-sm-3 col-form-label" for="inputcollege_preferred">Preferred College <span class="text-danger">*</span></label>
+            <div class="col-sm-9">
+              <select id="inputcollege_preferred" name="preferred_college[]" data-control="select2" class="form-select" required multiple="multiple">
+                {% if FieldValues.preferred_college %}
+                  <option selected>{{FieldValues.preferred_college}}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="row mt-1">
             <label class="col-sm-3 col-form-label" for="inputabroad_year">Year of Study<span class="text-danger">*</span></label>
             <div class="col-sm-9">
               <input required type="number" min="2000" max="2099" step="1" name="abroad_year" placeholder="Year" maxlength="15" class="form-control"
@@ -247,6 +258,19 @@
         };
         xhr.send();
       }
+      function serverSideFiltering2(params, callback) {
+        const country_p = document.getElementById("inputcountry").value;
+        console.log(params,country_p)
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '{% url "utils-country-list-world" %}?q=' + params.data.term+"&c="+country_p, true);
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            callback(data);
+          }
+        };
+        xhr.send();
+      }
       $('#inputcollege').select2({
         theme: 'bootstrap-5',
         ajax: {
@@ -264,6 +288,28 @@
           cache: true
         },
         minimumInputLength: 2,
+        placeholder: 'Search for College',
+        tags: true,
+      });
+      $('#inputcollege_preferred').select2({
+        theme: 'bootstrap-5',
+        ajax: {
+          transport: serverSideFiltering2,
+          processResults: function (data) {
+            return {
+              results: $.map(data, function(college_w) {
+                  return {
+                      id: college_w,
+                      text: college_w
+                  };
+              })
+            };
+          },
+          cache: true
+        },
+        minimumInputLength: 1,
+        allowClear: true,
+        maximumSelectionLength: 5,
         placeholder: 'Search for College',
         tags: true,
       });

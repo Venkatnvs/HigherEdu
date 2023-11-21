@@ -41,5 +41,17 @@ class CountryList(View):
         filtered_colleges = [entry['name'] for entry in data if term.lower() in entry['name'].lower()]
         return JsonResponse(filtered_colleges, safe=False)
     
+class CollegeListWorld(View):
+    file_path = os.path.join(settings.BASE_DIR,'datasets/world_universities.json')
+
+    def get(self,request):
+        term = request.GET.get('q', '')
+        term2 = request.GET.get('c', '')
+        with open(self.file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+
+        filtered_colleges = [entry['name'] for entry in data if ((term.lower() in entry['name'].lower()) and term2.lower() in entry['country'].lower())]
+        return JsonResponse(filtered_colleges, safe=False)
+
 def TermsConds(request):
     return render(request,'utils/terms_conds.html')

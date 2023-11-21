@@ -8,13 +8,19 @@ import csv
 import datetime
 from django.db.models import F,Value, CharField
 from django.db.models.functions import Cast, Coalesce, Concat
+from .dashboard import chart_view
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 @check_admin_required
 def Main(request):
     users = CustomUser.objects.filter(is_superuser=False)
     user_count = users.count()
+    a,b= chart_view()
     context = {
         "user_count":user_count,
+        "graphs_1":json.dumps(a,cls=DjangoJSONEncoder),
+        "graphs_2":json.dumps(b,cls=DjangoJSONEncoder),
     }
     return render(request,'ctm_admin/index.html',context)
 
