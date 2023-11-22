@@ -11,6 +11,7 @@ from django.db.models.functions import Cast, Coalesce, Concat
 from .dashboard import chart_view
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from utils.models import ContactUs
 
 @check_admin_required
 def Main(request):
@@ -27,10 +28,14 @@ def Main(request):
 class UsersListview(CheckAdminMixin,ListView):
     model = UserProfile
     template_name = 'ctm_admin/allusers_list.html'
-    paginate_by = 20
+    # paginate_by = 20
 
     def get_queryset(self):
         return UserProfile.objects.filter(user__is_superuser=False).order_by('created_at')
+
+class ContactUsListview(CheckAdminMixin,ListView):
+    model = ContactUs
+    template_name = 'ctm_admin/contacts_list.html'
 
 @check_admin_required
 def UserDataExportExcel(request):
@@ -41,7 +46,7 @@ def UserDataExportExcel(request):
     row_num = 0
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
-    columns = ['Email','Full Name','Gender','Mobile No.','Verification Status','Usn','College','Graduation Year','Abroad Country','Abroad Course','Abroad Year','Abroad Season','Created at']
+    columns = ['Email','Full Name','Gender','Mobile No.','Verification Status','Usn','College','Graduation Year','Abroad Country','Abroad Course','Abroad Preferred Country','Abroad Year','Abroad Season','Created at']
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
     font_style =  xlwt.XFStyle()
@@ -57,7 +62,8 @@ def UserDataExportExcel(request):
             'user__is_active',
             'usn','college',
             'graduation_year','country',
-            'course','abroad_year','abroad_season',
+            'course','preferred_college',
+            'abroad_year','abroad_season',
             'created_at')
     for row in rows:
         row_num += 1
@@ -72,7 +78,7 @@ def UserDataExportCsv(request):
     file_name = f'UserData{str(datetime.datetime.now())}.csv'
     response['Content-Disposition'] = 'attachment; filename='+file_name
     writer = csv.writer(response)
-    writer.writerow(['Email','Full Name','Gender','Mobile No.','Verification Status','Usn','College','Graduation Year','Abroad Country','Abroad Course','Abroad Year','Abroad Season','Created at'])
+    writer.writerow(['Email','Full Name','Gender','Mobile No.','Verification Status','Usn','College','Graduation Year','Abroad Country','Abroad Course','Abroad Preferred Country','Abroad Year','Abroad Season','Created at'])
 
     rows = UserProfile.objects.filter(user__is_superuser=False).annotate(
         first_name=F('user__first_name'),
@@ -86,7 +92,8 @@ def UserDataExportCsv(request):
             'user__is_active',
             'usn','college',
             'graduation_year','country',
-            'course','abroad_year','abroad_season',
+            'course','preferred_college',
+            'abroad_year','abroad_season',
             'created_at')
 
     for row in rows:

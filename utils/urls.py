@@ -9,4 +9,5 @@ urlpatterns = [
     path('country-list', csrf_exempt(CountryList.as_view()), name='utils-country-list'),
     path('country-list-world', csrf_exempt(CollegeListWorld.as_view()), name='utils-country-list-world'),
     path('terms-and-conditions', TermsConds, name='utils-terms-conds'),
+    path('contact-us', ContactUsForm.as_view(), name='utils-contact-us'),
 ]
