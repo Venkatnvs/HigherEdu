@@ -16,6 +16,8 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from allauth.account.signals import user_signed_up, email_confirmed
 from django.dispatch import receiver
 from django.contrib.auth.mixins import LoginRequiredMixin
+from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from allauth.exceptions import ImmediateHttpResponse
 
 User = get_user_model()
 
@@ -35,11 +37,14 @@ class Registration(View):
         graduation = request.POST['graduation']
         country = request.POST['country']
         course = request.POST['course']
+        preferred_college = request.POST.getlist('preferred_college[]')
         abroad_year = request.POST['abroad_year']
         season = request.POST['season']
         first_name, last_name = extract_first_last_name(fullname)
+        preferred_college_list = '\r\n'.join([college for college in preferred_college])
         context = {
-            'FieldValues':request.POST
+            'FieldValues':request.POST,
+            'preferred_college_values':preferred_college
         }
         if User.objects.filter(email=email).exists():
             messages.error(request,"Email already exists")
@@ -61,6 +66,7 @@ class Registration(View):
         user.userprofile.graduation_year = graduation
         user.userprofile.country = country
         user.userprofile.course = course
+        user.userprofile.preferred_college = preferred_college_list
         user.userprofile.abroad_year = abroad_year
         user.userprofile.abroad_season = season
         user.userprofile.abroad_season = season
@@ -237,10 +243,13 @@ class CompleteSocialAccount(LoginRequiredMixin,View):
         graduation = request.POST['graduation']
         country = request.POST['country']
         course = request.POST['course']
+        preferred_college = request.POST.getlist('preferred_college[]')
         abroad_year = request.POST['abroad_year']
         season = request.POST['season']
+        preferred_college_list = '\r\n'.join([college for college in preferred_college])
         context = {
-            'FieldValues':request.POST
+            'FieldValues':request.POST,
+            'preferred_college_values':preferred_college
         }
         if not (request.user.email == email):
             return HttpResponseForbidden("You have no permission to change it.")
@@ -259,6 +268,7 @@ class CompleteSocialAccount(LoginRequiredMixin,View):
         user.userprofile.graduation_year = graduation
         user.userprofile.country = country
         user.userprofile.course = course
+        user.userprofile.preferred_college = preferred_college_list
         user.userprofile.abroad_year = abroad_year
         user.userprofile.abroad_season = season
         user.userprofile.save()
@@ -272,3 +282,14 @@ def user_signed_up_(request, user, **kwargs):
     user.is_socialaccount = True
     # Group.objects.get(name='Manager').user_set.add(user)
     user.save()
+
+class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
+    def pre_social_login(self, request, sociallogin):
+        user = User.objects.filter(email = sociallogin.user.email)
+        if user.exists():
+            user = user.first()
+            if not user.is_socialaccount:
+                messages.error(request, "This account type is manually. Please use your email and password to sign in.")
+                redirect_url = reverse("accounts-login")
+                raise ImmediateHttpResponse(HttpResponseRedirect(redirect_url))
+        return super().pre_social_login(request, sociallogin)

@@ -19,8 +19,10 @@ class ProfileUpdate(CheckBasicAuthMixin,View):
         user = UserProfile.objects.filter(user=request.user)
         if not user.exists():
             return HttpResponseNotFound("Page Not Found")
+        user = user.first()
         context = {
-            'user':user.first()
+            'user':user,
+            'preferred_college_values':user.preferred_college_list
         }
         return render(request, 'profile/view_profile.html',context)
     
@@ -34,11 +36,16 @@ class ProfileUpdate(CheckBasicAuthMixin,View):
         graduation = request.POST['graduation']
         country = request.POST['country']
         course = request.POST['course']
+        preferred_college = request.POST.getlist('preferred_college[]')
         abroad_year = request.POST['abroad_year']
         season = request.POST['season']
         fullname = fullname.strip()
+        preferred_college = '\r\n'.join([college for college in preferred_college])
         if fullname == "":
             messages.error(request,"Full name cannot be Empty")
+            return redirect('dashboard-profile')
+        if len(mobile_no)>12:
+            messages.error(request, 'Invalid Mobile Number')
             return redirect('dashboard-profile')
         first_name, last_name = extract_first_last_name(fullname)
         try:
@@ -56,6 +63,7 @@ class ProfileUpdate(CheckBasicAuthMixin,View):
         user.country = country
         user.abroad_year = abroad_year
         user.course  = course
+        user.preferred_college = preferred_college
         user.abroad_season  = season
         user.user.save()
         user.save()

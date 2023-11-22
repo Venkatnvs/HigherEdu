@@ -54,10 +54,18 @@ class UserProfile(models.Model):
     graduation_year = models.IntegerField(null=True, blank=True)
     country = models.CharField(max_length=255, null=True, blank=True)
     course = models.CharField(max_length=255, null=True, blank=True)
+    preferred_college = models.TextField(null=True,blank=True)
     abroad_year = models.IntegerField(null=True, blank=True)
     abroad_season = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def preferred_college_list(self):
+        out = self.preferred_college
+        if self.preferred_college is not None:
+            out = [item for item in self.preferred_college.split('\r\n') if item]
+        return out
 
     def __str__(self):
         return self.user.email
