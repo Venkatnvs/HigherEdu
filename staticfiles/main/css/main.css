@@ -104,8 +104,8 @@ h6 {
   padding: 10px 0;
   -webkit-animation-name: dropdown-animate;
   animation-name: dropdown-animate;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.1s;
+  animation-duration: 0.1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   border: 0;
@@ -154,13 +154,13 @@ h6 {
     content: "";
     width: 13px;
     height: 13px;
-    background: #fff;
+    background: #660076;
     position: absolute;
     top: -7px;
     right: 20px;
     transform: rotate(45deg);
-    border-top: 1px solid #eaedf1;
-    border-left: 1px solid #eaedf1;
+    border-top: 1px solid #9d3dac;
+    border-left: 1px solid #8f389c;
   }
 }
 
@@ -572,6 +572,16 @@ h6 {
   .hero .btn-get-started {
     font-size: 14px;
   }
+  .hero .thanks_mn .thanks_mn_img {
+    max-height: 150px;
+  }
+  .hero .thanks_mn h2 {
+    font-size: 32px;
+  }
+  .hero .thanks_mn .btn-get-started {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
 }
 
 .text-gray-800 {
@@ -751,5 +761,5 @@ h6 {
   }
   
   .header-nav .profile .dropdown-item:hover {
-    background-color: #f6f9ff;
+    background-color: #660076;
   }

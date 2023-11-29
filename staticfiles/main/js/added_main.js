@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       once: true,
       mirror: false
     });
+    AOS.init({disable: 'mobile'});
   }
   window.addEventListener('load', () => {
     aos_init();

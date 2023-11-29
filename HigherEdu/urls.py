@@ -13,6 +13,7 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('admin/', include('ctm_admin.urls')),
     path('utils/', include('utils.urls')),
+    path('study-abroad/', include('applies.urls')),
     re_path(r'^favicon\.ico$', fav_icon),
 ]
 if settings.DEBUG :

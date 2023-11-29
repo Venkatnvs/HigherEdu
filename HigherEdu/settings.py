@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'accounts',
     'dashboard',
     'ctm_admin',
+    'applies',
 ]
 
 SITE_NAME = "HigherEdu"
