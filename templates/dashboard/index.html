@@ -8,7 +8,7 @@ Home | {{site_name}}
 {% block content %}
 {% if request.user.is_authenticated %}
 <section id="hero" class="hero">
-  <div class="container position-relative">
+  <div class="container position-relative thanks_mn">
     <div class="row gy-5" data-aos="fade-in">
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center">
         <h2 class="text-center">Thanks For Applying in {{site_name}}</h2>
@@ -19,7 +19,7 @@ Home | {{site_name}}
         </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 d-flex justify-content-center">
-        <img src="{% static 'main/img/thanks_page_logo.png' %}" class="img-fluid" alt="thanks_logo" data-aos="zoom-out" data-aos-delay="100">
+        <img src="{% static 'main/img/thanks_page_logo.png' %}" class="img-fluid thanks_mn_img" alt="thanks_logo" data-aos="zoom-out" data-aos-delay="100">
       </div>
     </div>
   </div>
