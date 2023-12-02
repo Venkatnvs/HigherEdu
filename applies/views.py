@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from .models import AvaliableCourses
 
 def CountryByApply(request):
-    return render(request,'applies/bycnt/index.html')
+    crs = AvaliableCourses.objects.filter(is_active=True)
+    context = {
+        'data':crs
+    }
+    return render(request,'applies/bycnt/index.html',context)

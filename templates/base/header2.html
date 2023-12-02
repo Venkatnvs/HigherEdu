@@ -11,10 +11,10 @@
         <ul>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Career Counselling</a></li>
-              <li><a href="#">Scholarships</a></li>
-              <li><a href="#">Visa Assistance</a></li>
-              <li><a href="#">Test Preparation</a></li>
+              <li><a href="{% url 'services-career-counselling' %}">Career Counselling</a></li>
+              <li><a href="{% url 'services-scholarships' %}">Scholarships</a></li>
+              <li><a href="{% url 'services-visa-assistance' %}">Visa Assistance</a></li>
+              <li><a href="{% url 'services-test-preparation' %}">Test Preparation</a></li>
               <li><a href="#">Application Process</a></li>
             </ul>
           </li>
@@ -39,12 +39,12 @@
               <li><a href="#">Australia</a></li>
             </ul>
           </li>
-          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="{% url 'dashboard-about' %}">About</a></li>
           <li><a class="nav-link" href="{% url 'utils-contact-us' %}">Contact</a></li>
           {% if request.user.is_authenticated %}
             {% include 'base/_details/profile_on_login.html' %}
           {% else %}
-            <li><a href="{% url 'accounts-login' %}" class="header_lr_btn_login btn btn-outline-light rounded-2 text-center">Login</a></li>
+            <li><a href="{% url 'accounts-login' %}" class="header_lr_btn_login btn btn-outline-light">Login</a></li>
             <li><a href="{% url 'accounts-register' %}" class="header_lr_btn_reg btn btn-light text-default">SignUp</a></li>
             {% endif %}
         </ul>
