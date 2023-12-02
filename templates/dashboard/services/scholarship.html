@@ -1,0 +1,45 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block title %}
+Scholarship | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<style>
+    .container-bd {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+    .container-bd p {
+        color: #4f4f4f;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row pt-3">
+    <h2
+        class="text-center bg-white shadow-sm py-1 bg-opacity-75 text-dark fw-bold border border-default border-2 rounded-pill">
+        SCHOLARSHIPS</h2>
+    <div class="container-bd mt-4 px-4">
+        <p>Exploring scholarship opportunities is a crucial aspect of planning for your higher education journey. Each university or institute has its unique policies regarding scholarships and financial assistance, aiming to support students in various ways. These opportunities are typically awarded based on factors such as merit, financial need, place of origin, program, and gender.</p>
+
+    <p>Here's a breakdown of the different types of scholarships and financial help available:</p>
+
+    <ul>
+        <li><strong>Merit-based:</strong> Awarded to students who have demonstrated excellence in academics, sports, extracurricular activities, or volunteering work. These scholarships recognize and reward outstanding achievements.</li>
+        <li><strong>Need-based:</strong> Designed to provide financial support to students with limited financial resources. The assessment is usually done by the institute or university to identify those who require assistance to pursue their education.</li>
+        <li><strong>Country-based:</strong> Some universities, governments, or public agencies establish agreements to provide financial help or scholarships to students from specific nations. This fosters international collaboration and helps students from those countries pursue education abroad.</li>
+        <li><strong>Program-Specific:</strong> Tailored for students who have chosen a particular field of study. These scholarships encourage specialization in specific areas and provide support to those dedicated to advancing their knowledge in a specific discipline.</li>
+    </ul>
+
+    <p>It's essential for students to research and understand the scholarship opportunities available at each university they are considering. This knowledge not only aids in making informed decisions about pursuing higher education but also plays a crucial role in managing financial commitments throughout the academic journey.</p>
+
+    <p>At {{site_name}}, we are committed to helping you navigate the scholarship landscape. Explore the various options available and embark on your journey towards a successful and financially supported education.</p>
+    </div>
+</div>
+{% endblock content %}

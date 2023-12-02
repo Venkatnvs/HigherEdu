@@ -74,6 +74,9 @@
 .text-default{
     color: #660076 !important;
 }
+.border-default{
+  border-color: #660076 !important;
+}
 .check_box_nvs{
     padding:10px;
     border-color:#b1b3b5;
@@ -463,6 +466,13 @@
 }
 .header_lr_btn_login{
   margin-left: 30px;
+}
+.header_lr_btn_login:hover{
+  color: #660076!important;
+}
+.header_lr_btn_reg:hover{
+  color: #ffffff!important;
+  background-color: #660076!important;
 }
 @media screen and (max-width: 900px) {
   .header_lr_btn_login{

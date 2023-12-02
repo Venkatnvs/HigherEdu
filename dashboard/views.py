@@ -97,3 +97,18 @@ class UpdatePassword(CheckBasicAuthMixin,View):
         user.save()
         messages.success(request,'Password updated successfully')
         return redirect('dashboard-update-password')
+    
+def CareerCounsellingPage(request):
+    return render(request,'dashboard/services/career-counselling.html')
+
+def ScholarshipPage(request):
+    return render(request,'dashboard/services/scholarship.html')
+
+def VisaAssistancePage(request):
+    return render(request,'dashboard/services/visa-assistance.html')
+
+def TestPreparationPage(request):
+    return render(request,'dashboard/services/test-preparation.html')
+
+def AboutPage(request):
+    return render(request,'dashboard/about/index.html')
