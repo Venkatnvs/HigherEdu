@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'accounts',
     'dashboard',
     'ctm_admin',
+    'ctm_admin.subapps.ads',
     'applies',
 ]
 
-SITE_NAME = "HigherEdu"
+SITE_NAME = "Skillmithra"
 SITE_ID = 1
 SOCIALACCOUNT_LOGIN_ON_GET = True
 

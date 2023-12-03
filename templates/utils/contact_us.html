@@ -1,5 +1,6 @@
 {% extends 'base/index.html' %}
 {% load static %}
+{% load cmutils %}
 
 {% block title %}
 Contact Us | {{site_name}}
@@ -7,9 +8,12 @@ Contact Us | {{site_name}}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-2">
         <div class="d-flex justify-content-center">
             <img class="img-fluid" src="{% static 'main/img/contact_page_logo.png' %}"  width="100%" alt="contact_us_logo">
+        </div>
+        <div class="row my-2 d-flex justify-content-center">
+          {{ad | GetAd_size:'300x200' | safe}}
         </div>
     </div>
     <div class="col-md-7">
@@ -56,6 +60,11 @@ Contact Us | {{site_name}}
                 </form>
             </div>
         </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'300x600' | safe}}
+      </div>
     </div>
 </div>
 {% endblock content %}

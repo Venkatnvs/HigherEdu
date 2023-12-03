@@ -1,5 +1,6 @@
 {% extends 'base/index.html' %}
 {% load static %}
+{% load cmutils %}
 
 {% block title %}
     Career Counseling | {{site_name}}
@@ -31,5 +32,9 @@
         
         <p>Whether you're just starting out, thinking of switching careers, or aiming to boost your current job, our Career Counseling is here to make sure you're on the right track. Let's turn your dreams into plans!</p>
     </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x300' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+      </div>
 </div>
 {% endblock content %}

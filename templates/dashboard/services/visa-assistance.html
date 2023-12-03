@@ -1,5 +1,6 @@
 {% extends 'base/index.html' %}
 {% load static %}
+{% load cmutils %}
 
 {% block title %}
 Visa Assistance | {{site_name}}
@@ -43,5 +44,9 @@ Visa Assistance | {{site_name}}
     <p>Trust us to make your international education journey seamless and stress-free.</p>
 
     </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x300' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+      </div>
 </div>
 {% endblock content %}
