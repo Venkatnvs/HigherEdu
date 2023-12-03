@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Campus Tour</title>
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+
+<body>
+
+    <a-scene>
+        <!-- Default location -->
+        <a-sky src="{% static 'applies/img/11.jpg' %}"></a-sky>
+        {% comment %} <a-sky src="https://staticmap.openstreetmap.de/staticmap.php?center=40.748817,-73.985428&zoom=14&size=2048x1024&maptype=mapnik"></a-sky> {% endcomment %}
+        <!-- Use the proxy server to fetch the image -->
+{% comment %} <a-sky src="{% url 'proxy_openstreetmap_image' %}"></a-sky> {% endcomment %}
+
+        <!-- Hotspot to another location -->
+        <a-entity position="-5 1 0">
+            <a-text value="Go to Another Location" align="center" wrap-count="20"></a-text>
+            <a-plane color="#6173F4" height="2" width="4" href="next_location.html"></a-plane>
+        </a-entity>
+    </a-scene>
+
+</body>
+
+</html>
