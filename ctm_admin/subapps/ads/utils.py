@@ -3,7 +3,7 @@ from .models import AdsBase
 def GetAds(size):
     height = width = None
     if size:
-        height, width = size.split('x')
+        width,height = size.split('x')
         queryset = AdsBase.objects.filter(size__height=height, size__width=width,is_active=True).order_by('?')
         if queryset.exists():
             ad = queryset.first()

@@ -2,11 +2,11 @@ from django.db import models
 import uuid
 
 class AdsSize(models.Model):
-    height = models.CharField(max_length=100,null=True,blank=True)
     width = models.CharField(max_length=100,null=True,blank=True)
+    height = models.CharField(max_length=100,null=True,blank=True)
     
     def __str__(self):
-        return f"{self.height}x{self.width}"
+        return f"{self.width}x{self.height}"
 
 class AdsBase(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
