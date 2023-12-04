@@ -121,6 +121,8 @@ from django.http import JsonResponse
 import json
 def Test(request):
     return render(request,'dashboard/test.html')
+def Test3(request):
+    return render(request,'dashboard/test3.html')
 def Test2(request):
     return render(request,'dashboard/test2.html')
 
