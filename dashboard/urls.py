@@ -7,7 +7,8 @@ urlpatterns = [
     path('update-password/', UpdatePassword.as_view(), name='dashboard-update-password' ),
 
     # Test
-    path('test/', Test, name='dashboard-test' ),
+    path('test/dsu/1', Test, name='dashboard-test' ),
+    path('test/dsu/2', Test3, name='dashboard-test' ),
     path('test2/', Test2, name='dashboard-test2' ),
     path('chat/', chat_view, name='chat_view'),
 
