@@ -26,6 +26,28 @@
           </li>
         </ul>
       </li><!-- End Components Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#ads-cont" data-bs-toggle="collapse" href="#">
+          <i class="fa-solid fa-bullhorn"></i></i><span>Ads</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="ads-cont" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'ctm_admin-all-users' %}">
+              <i class="bi bi-circle"></i><span>Add Ads Size</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'ctm_admin-all-users' %}">
+              <i class="bi bi-circle"></i><span>Add Ads</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>View Ads</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
 
       <li class="nav-heading">Pages</li>
 
