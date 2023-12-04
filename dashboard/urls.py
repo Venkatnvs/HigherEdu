@@ -10,7 +10,9 @@ urlpatterns = [
     path('test/', Test, name='dashboard-test' ),
     path('test2/', Test2, name='dashboard-test2' ),
     path('chat/', chat_view, name='chat_view'),
-    path('proxy-openstreetmap-image/', proxy_openstreetmap_image, name='proxy_openstreetmap_image'),
+
+    # Cost Of Study
+    path("cost-of-study/usa/", CostStudyUsa, name="cost-of-study-usa"),
 
     # About Page
     path('about/',AboutPage,name="dashboard-about"),

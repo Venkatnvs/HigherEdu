@@ -409,7 +409,7 @@
             </div>
         </div>
         <!--===============CHAT ON BUTTON STRART===============-->
-        <div class="chat_on"> <span class="chat_on_icon"><i class="fa fa-comments" aria-hidden="true"></i></span> </div>
+        <div class="chat_on"> <span class="chat_on_icon"><i class="fa fa-comments chat_on_icon-fa" aria-hidden="true"></i></span> </div>
         <!--===============CHAT ON BUTTON END===============-->
     </div>
 {% endblock content %}
@@ -419,47 +419,49 @@
 {% block scripts %}
     <script>
 $(document).ready(function(){
-    $(".chat_on").click(function(){
+    $(".chat_on").click(function () {
         $(".Layout").toggle();
         $(".chat_on").hide(300);
+        scrollToBottom();
     });
-    
-       $(".chat_close_icon").click(function(){
+
+    $(".chat_close_icon").click(function () {
         $(".Layout").hide();
-           $(".chat_on").show(300);
+        $(".chat_on").show(300);
     });
-    
+
     // Handle sending and receiving messages on Enter key press
-    $(".Input_field").keypress(function(event){
-        if (event.which === 13) { // Check if the pressed key is Enter (key code 13)
-            event.preventDefault(); // Prevent the default behavior of the Enter key (e.g., line break in a textarea)
+    $(".Input_field").keypress(function (event) {
+        if (event.which === 13) {
+            event.preventDefault();
 
             var userMessage = $(".Input_field").val().trim();
             if (userMessage !== '') {
-                // Display user's message
                 displayMessage('user', userMessage);
-
-                // Send the user message to the Django backend
                 sendUserMessage(userMessage);
-
-                // Clear the input field
                 $(".Input_field").val('');
             }
         }
     });
 
-    // Handle sending and receiving messages on button click
-    $(".Input_button-send").click(function(){
+    $(".Input_button-send").click(function () {
         var userMessage = $(".Input_field").val().trim();
         if (userMessage !== '') {
-            // Display user's message
             displayMessage('user', userMessage);
-
-            // Send the user message to the Django backend
             sendUserMessage(userMessage);
-
-            // Clear the input field
             $(".Input_field").val('');
+        }
+    });
+
+    // Close the chat box when clicking outside of it
+    $(document).on('click', function (event) {
+        var chatBox = $(".Layout");
+        var chatIcon = $(".chat_on_icon");
+        var chatIconfa = $(".chat_on_icon-fa");
+
+        if (!chatBox.is(event.target) && chatBox.has(event.target).length === 0 && !chatIcon.is(event.target) && !chatIconfa.is(event.target)) {
+            $(".Layout").hide();
+            $(".chat_on").show(300);
         }
     });
 
@@ -467,8 +469,8 @@ $(document).ready(function(){
     function displayMessage(sender, message) {
         var messageContainer = $(".Messages_list");
         var messageClass = (sender === 'user') ? 'UserMessage' : 'BotMessage';
-        console.log(messageClass)
         messageContainer.append('<div class="' + messageClass + '">' + message + '</div>');
+        scrollToBottom();
     }
 
     // Function to scroll to the bottom of the chat window
@@ -477,22 +479,18 @@ $(document).ready(function(){
         messagesContainer.scrollTop(messagesContainer[0].scrollHeight);
     }
 
-    // Function to send the user's message to the Django backend
     function sendUserMessage(userMessage) {
         $.ajax({
             url: '/chat/', // Update with your Django API endpoint
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ 'user_message': userMessage }),
-            success: function(data) {
-                // Update the UI with the server's response
+            success: function (data) {
                 var replyMessage = data.reply_message || "Error processing message.";
-                // Display bot's reply
                 displayMessage('bot', replyMessage);
-                // Scroll to the bottom after adding new messages
                 scrollToBottom();
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Error sending user message:', error);
             }
         });

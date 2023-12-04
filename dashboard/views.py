@@ -113,8 +113,11 @@ def TestPreparationPage(request):
 def AboutPage(request):
     return render(request,'dashboard/about/index.html')
 
-import requests
-from django.http import HttpResponse,JsonResponse
+def CostStudyUsa(request):
+    return render(request, 'dashboard/cost_study/usa.html')
+
+
+from django.http import JsonResponse
 import json
 def Test(request):
     return render(request,'dashboard/test.html')
@@ -123,17 +126,12 @@ def Test2(request):
 
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt  # This is used for simplicity. In production, use a proper CSRF protection method.
+@csrf_exempt
 def chat_view(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         user_message = data.get('user_message', '')
-        # Add your chat logic here to generate the bot's reply
         bot_reply = "You said: " + user_message
         return JsonResponse({'reply_message': bot_reply})
     else:
         return JsonResponse({'error': 'Invalid request method'})
-def proxy_openstreetmap_image(request):
-    url = "https://staticmap.openstreetmap.de/staticmap.php?center=40.748817,-73.985428&zoom=14&size=2048x1024&maptype=mapnik"
-    response = requests.get(url)
-    return HttpResponse(response.content, content_type=response.headers['Content-Type'])
