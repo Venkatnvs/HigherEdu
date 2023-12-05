@@ -12,6 +12,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('dashboard.urls')),
     path('admin/', include('ctm_admin.urls')),
+    path('ads/', include('ctm_admin.subapps.ads.urls')),
     path('utils/', include('utils.urls')),
     path('study-abroad/', include('applies.urls')),
     re_path(r'^favicon\.ico$', fav_icon),

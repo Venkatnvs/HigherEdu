@@ -134,36 +134,3 @@ Login | {{site_name}}
     </div>
   </div>
 {% endblock content %}
-
-{% block styles %}
-  <style>
-  .btn-google {
-    color: #545454;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 1px #ddd;
-  }
-  .large-screen{
-    display: block;
-  }
-  .small-screen{
-    display: none;
-  }
-  #main > .container{
-    padding: 0px !important;
-  }
-  @media screen and (max-width: 600px) {
-    .large-screen{
-      display: none!important;
-    }
-    .small-screen{
-      display: block;
-    }
-    #main > .container{
-      padding: 1px !important;
-    }
-    .check_box_nvs{
-      margin-right: 1px !important;
-    }
-  }
-  </style>
-{% endblock styles %}
