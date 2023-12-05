@@ -17,9 +17,11 @@ from utils.models import ContactUs
 def Main(request):
     users = CustomUser.objects.filter(is_superuser=False)
     user_count = users.count()
+    contact_msg_count = ContactUs.objects.filter(is_replyed=False).count()
     a,b= chart_view()
     context = {
         "user_count":user_count,
+        "contact_msg_count":contact_msg_count,
         "graphs_1":json.dumps(a,cls=DjangoJSONEncoder),
         "graphs_2":json.dumps(b,cls=DjangoJSONEncoder),
     }

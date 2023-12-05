@@ -3,7 +3,8 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="/" class="logo d-flex align-items-center">
-        <img src="{% static 'icons/logo.jpg' %}" alt="logo"/>
+        <img class="mx-0" src="{% static 'icons/favicon.png' %}" alt="logo"/>
+        <img style="margin-left:-10px" src="{% static 'icons/logo-white.png' %}" alt="logo"/>
         <span class="d-none">{{site_name}}</span>
       </a>
 
@@ -18,8 +19,10 @@
               <li><a href="#">Application Process</a></li>
             </ul>
           </li>
-          <li><a class="nav-link" href="{% url 'applies-courses' %}">Study Abroad</a></li>
-          <li class="dropdown"><a href="{% url 'applies-courses' %}"><span>Cost of Study</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="{% url 'applies-courses' %}"><span>Study Abroad</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link" href="{% url 'applies-courses' %}">Courses</a></li>
+            <li class="dropdown"><a href="{% url 'applies-courses' %}"><span>Cost of Study</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
               <li><a href="{% url 'cost-of-study-usa' %}">usa</a></li>
               <li class="dropdown"><a href="#"><span>Europe</span> <i class="bi bi-chevron-right"></i></a>
@@ -38,6 +41,8 @@
               <li><a href="#">Asia</a></li>
               <li><a href="#">Australia</a></li>
             </ul>
+            </li>
+          </ul>
           </li>
           <li><a class="nav-link" href="{% url 'dashboard-about' %}">About</a></li>
           <li><a class="nav-link" href="{% url 'utils-contact-us' %}">Contact</a></li>
