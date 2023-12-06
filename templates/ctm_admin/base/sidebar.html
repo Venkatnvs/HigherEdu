@@ -32,18 +32,13 @@
         </a>
         <ul id="ads-cont" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{% url 'ctm_admin-all-users' %}">
+            <a href="{% url 'ctm_admin-ads_size_list_create' %}">
               <i class="bi bi-circle"></i><span>Ads Sizes</span>
             </a>
           </li>
           <li>
-            <a href="{% url 'ctm_admin-all-users' %}">
-              <i class="bi bi-circle"></i><span>Add Ads</span>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="bi bi-circle"></i><span>View Ads</span>
+            <a href="{% url 'ctm_admin-ads-list-view' %}">
+              <i class="bi bi-circle"></i><span>All Ads</span>
             </a>
           </li>
         </ul>
@@ -52,7 +47,7 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'ctm_admin-contact-messages' %}">
+        <a class="nav-link collapsed" href="{% url 'ctm_admin-contactus_list' %}">
           <i class="fa-regular fa-paper-plane"></i>
           <span>Contact Messages</span>
         </a>

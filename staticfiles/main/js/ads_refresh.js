@@ -5,11 +5,15 @@ setInterval(function () {
   adContainers.forEach((container) => {
     const size = container.getAttribute("data-ad-size");
     fetch(`/ads/get_new_refresh?size=${size}`)
-      .then((response) => response.text())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok for ${size}`);
+        }
+        return response.json();
+      })
       .then((newAdHtml) => {
-        data = JSON.parse(newAdHtml)
-        console.log(data)
-        container.innerHTML = data.new_ad_html;
+        console.log(newAdHtml)
+        container.innerHTML = newAdHtml.new_ad_html;
       })
       .catch((error) => console.error(`Error refreshing ${size} ad:`, error));
   });

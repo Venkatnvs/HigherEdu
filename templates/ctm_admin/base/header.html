@@ -3,12 +3,13 @@
     <nav class="nav-header header-nav">
         <div class="text-light nav-main-b">
             <a href="{% url 'ctm_admin-main' %}" class="logo">
-                <img src="{% static 'icons/logo.jpg' %}" alt="logo"/>
+                <img class="d-none d-md-block" src="{% static 'icons/logo.jpg' %}" alt="logo"/>
                 <h2>{{site_name}} <span class="text-light fs-4">ADMIN</span></h2>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
         <div style="gap: 6px;" class="mx-1">
+          <a style="width: max-content;" class="text-xs" href="/"><i class="fa-solid fa-eye"></i>&nbsp;View Site</a>
             <div style="gap: 6px;" class="mx-1">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown pe-3">
