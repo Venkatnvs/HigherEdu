@@ -30,14 +30,9 @@ def Main(request):
 class UsersListview(CheckAdminMixin,ListView):
     model = UserProfile
     template_name = 'ctm_admin/allusers_list.html'
-    # paginate_by = 20
 
     def get_queryset(self):
         return UserProfile.objects.filter(user__is_superuser=False).order_by('created_at')
-
-class ContactUsListview(CheckAdminMixin,ListView):
-    model = ContactUs
-    template_name = 'ctm_admin/contacts_list.html'
 
 @check_admin_required
 def UserDataExportExcel(request):

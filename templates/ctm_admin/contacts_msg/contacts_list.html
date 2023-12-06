@@ -24,7 +24,7 @@ Contact Messages | {{site_name}} Admin
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in contactus_list %}
+                            {% for i in contacts %}
                             <tr>
                                 <td>{{ i.name }}</td>
                                 <td>{{ i.email }}</td>
@@ -36,9 +36,9 @@ Contact Messages | {{site_name}} Admin
                                             Select an option
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-eye"></i> View Details</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square"></i> Edit</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-trash"></i> Delete</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'ctm_admin-contactus_detail' i.pk %}"><i class="fa-solid fa-eye"></i> View Details</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'ctm_admin-contactus_edit' i.pk %}"><i class="fa-solid fa-pen-to-square"></i> Edit</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'ctm_admin-contactus_delete' i.pk %}" onclick="return confirm('Are you sure you want to delete this message?')"><i class="fa-solid fa-trash"></i> Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>

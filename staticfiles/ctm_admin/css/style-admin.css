@@ -63,9 +63,27 @@
     border: 1px solid #660076 !important;
     color: #fff !important;
 }
+.btn.btn-default-dark {
+    background: #5f016e !important;
+    border: 1px solid #5f016e !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
 .text-default{
     color: #660076 !important;
 }
+.border-default{
+    border-color: #660076 !important;
+  }
+  .table-default{
+    --bs-table-color: #ffffff;
+    --bs-table-bg: #660076;
+    --bs-table-border-color: #660076;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+  }
 .check_box_nvs{
     padding:10px;
     border-color:#b1b3b5;

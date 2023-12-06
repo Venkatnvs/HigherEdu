@@ -8,6 +8,8 @@ class CheckBasicAuthMixin(LoginRequiredMixin,UserPassesTestMixin):
             return self.request.user.is_completed
         return self.request.user.is_active
 
-    def handle_no_permission(self,request):
-        messages.warning(request,'Complete your Account Setup')
-        return redirect("accounts-complete-social")
+    def handle_no_permission(self):
+        if not self.request.user:
+            messages.warning(self.request, 'Complete your Account Setup')
+            return redirect("accounts-complete-social")
+        return super().handle_no_permission()
