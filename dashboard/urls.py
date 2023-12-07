@@ -23,4 +23,11 @@ urlpatterns = [
     path('services/scholarships/',ScholarshipPage,name="services-scholarships"),
     path('services/visa-assistance/',VisaAssistancePage,name="services-visa-assistance"),
     path('services/test-preparation/',TestPreparationPage,name="services-test-preparation"),
+
+    # Courses
+    path('courses/gre-gmat-cat-coaching/', Gre_Gmat_CatPage,name="courses-gre-gmat-cat-coaching"),
+    path('courses/gate-coaching/', GateCoachingPage,name="courses-gate-coaching"),
+    path('courses/civil-services-coaching/', CivilServicesPage,name="courses-civil-services-coaching"),
+    path('courses/ielts-coaching/', IeltsCoachingPage,name="courses-ielts-coaching"),
+    path('courses/foreign-languages-coaching/', ForeignLanguagesPage,name="courses-foreign-languages-coaching"),
 ]

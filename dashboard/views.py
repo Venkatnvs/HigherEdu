@@ -97,7 +97,9 @@ class UpdatePassword(CheckBasicAuthMixin,View):
         user.save()
         messages.success(request,'Password updated successfully')
         return redirect('dashboard-update-password')
-    
+
+# Services
+
 def CareerCounsellingPage(request):
     return render(request,'dashboard/services/career-counselling.html')
 
@@ -137,3 +139,21 @@ def chat_view(request):
         return JsonResponse({'reply_message': bot_reply})
     else:
         return JsonResponse({'error': 'Invalid request method'})
+    
+
+# Courses
+
+def Gre_Gmat_CatPage(request):
+    return render(request, 'dashboard/courses/gre_gmat_cat.html')
+
+def GateCoachingPage(request):
+    return render(request, 'dashboard/courses/gate-coaching.html')
+
+def CivilServicesPage(request):
+    return render(request, 'dashboard/courses/civil-services-coaching.html')
+
+def IeltsCoachingPage(request):
+    return render(request, 'dashboard/courses/ielts-coaching.html')
+
+def ForeignLanguagesPage(request):
+    return render(request, 'dashboard/courses/foreign_languages.html')

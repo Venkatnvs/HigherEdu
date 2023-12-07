@@ -1,0 +1,60 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load cmutils %}
+
+{% block title %}
+Foregin Languages Training  | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<style>
+    .container-bd {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+    .container-bd p {
+        color: #4f4f4f;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row pt-3">
+    <h2
+        class="text-center bg-white shadow-sm py-1 bg-opacity-75 text-dark fw-bold border border-default border-2 rounded-pill">
+        FOREIGN LANGUAGE TRAINING</h2>
+    <div class="row mb-3">
+        <div class="col-md-10">
+            <div class="container-bd mt-4 px-4">
+                <p>Embark on a journey to learn a new language with {{site_name}}'s Foreign Language Training. Explore courses in German, French, Japanese, and Spanish, and broaden your linguistic horizons.</p>
+            
+                <p>Our experienced instructors provide immersive language learning experiences, focusing on practical skills in speaking, writing, listening, and reading. Whether you're a beginner or looking to enhance your proficiency, our courses cater to all levels.</p>
+                
+                <p>Apply now for our language training programs and unlock the doors to new cultures and opportunities.</p>
+                
+                <p>Click on the language of your choice below to apply:</p>
+            
+            <ul class="list-unstyled">
+                <li><a href="" class="btn btn-link">German</a></li>
+                <li><a href="" class="btn btn-link">French</a></li>
+                <li><a href="" class="btn btn-link">Japanese</a></li>
+                <li><a href="" class="btn btn-link">Spanish</a></li>
+            </ul>
+            </div>
+            <a href="#" class="btn btn-default w-100">Apply Now</a>
+        </div>
+        <div class="col-md-2">
+            <div class="row my-1 d-flex justify-content-center">
+                {{ad | GetAd_size:'300x600' | safe}}
+            </div>
+        </div>
+    </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x400' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+    </div>
+</div>
+{% endblock content %}

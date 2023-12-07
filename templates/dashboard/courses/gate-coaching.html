@@ -1,0 +1,50 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load cmutils %}
+
+{% block title %}
+GATE Coaching  | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<style>
+    .container-bd {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+    .container-bd p {
+        color: #4f4f4f;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row pt-3">
+    <h2
+        class="text-center bg-white shadow-sm py-1 bg-opacity-75 text-dark fw-bold border border-default border-2 rounded-pill">
+        GATE Coaching </h2>
+        <div class="container-bd mt-4 px-4">
+            <p>Excel in the GATE exam with {{site_name}}'s dedicated coaching. Our expert faculty and personalized approach ensure comprehensive preparation for success.</p>
+        
+            <p>Benefit from focused curricula, interactive learning, and advanced study materials. Our experienced tutors provide guidance to help you tackle each section effectively.</p>
+            
+            <p>Engage in workshops and discussions to create a dynamic learning environment. Receive personalized feedback to track your progress and enhance your performance.</p>
+            
+            <p>At {{site_name}}, we understand the demands of the GATE exam. Choose us as your coaching partner to unlock your full potential. <a href="#">Enroll now</a> and embark on a successful GATE preparation journey!</p>
+        </div>
+    <div class="row mb-3">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <a href="#" class="btn btn-default w-100">Apply Now</a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x400' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+    </div>
+</div>
+{% endblock content %}
