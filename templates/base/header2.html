@@ -10,6 +10,22 @@
 
       <nav id="navbar" class="navbar">
         <ul>
+          <li class="dropdown"><a href="#"><span>Courses</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li class="dropdown"><a href="{% url 'courses-foreign-languages-coaching' %}"><span>Foreign language</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">German</a></li>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">French</a></li>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">Japanese</a></li>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">Spanish</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'courses-gre-gmat-cat-coaching' %}">GRE / GMAT / CAT</a></li>
+              <li><a href="{% url 'courses-gate-coaching' %}">GATE Coaching </a></li>
+              <li><a href="{% url 'courses-civil-services-coaching' %}">Civil services (UPSC) </a></li>
+              <li><a href="{% url 'courses-ielts-coaching' %}">IELTS</a></li>
+            </ul>
+          </li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'services-career-counselling' %}">Career Counselling</a></li>
