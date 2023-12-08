@@ -13,3 +13,35 @@ def GetAd_size(value, arg):
 # <img style="max-width:100%!important;height: 100%;width:{W}px;max-height:{H}px;cursor: pointer;" onclick="window.open('{forward}', '_blank')" class="img_fluid" src="{url}" alt="ad_{arg}">
 # </div>"""
     return html_send
+
+@register.filter(name='has_permissions')
+def has_permissions(user, permissions_str):
+    permissions = permissions_str.split(',')
+    if user.is_superuser:
+        return True
+    elif permissions and user.user_type:
+        return all(
+            user.user_type.permissions.filter(
+                content_type__app_label=permission.split('.')[0],
+                codename=permission.split('.')[1]
+            ).exists()
+            for permission in permissions
+        )
+    else:
+        return False
+
+@register.filter(name='has_permissions_or')
+def has_permissions_or(user, permissions_str):
+    permissions = permissions_str.split(',')
+    if user.is_superuser:
+        return True
+    elif permissions and user.user_type:
+        return any(
+            user.user_type.permissions.filter(
+                content_type__app_label=permission.split('.')[0],
+                codename=permission.split('.')[1]
+            ).exists()
+            for permission in permissions
+        )
+    else:
+        return False

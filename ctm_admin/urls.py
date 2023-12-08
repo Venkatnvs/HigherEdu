@@ -4,6 +4,16 @@ from .contacts_views import *
 
 urlpatterns = [
     path("", Main, name="ctm_admin-main"),
+
+    # User Type
+    path('usertypes/', UserTypeListView.as_view(), name='ctm_admin-usertype_list'),
+    path('usertypes/create/', UserTypeCreateView.as_view(), name='ctm_admin-usertype_create'),
+    path('usertypes/<int:pk>/', UserTypeDetailView.as_view(), name='ctm_admin-usertype_detail'),
+    path('usertypes/<int:pk>/edit/', UserTypeUpdateView.as_view(), name='ctm_admin-usertype_edit'),
+    path('usertypes/<int:pk>/delete/', UserTypeDeleteView.as_view(), name='ctm_admin-usertype_delete'),
+
+    # Users
+    path("create-users/", CreateUser.as_view(), name="ctm_admin-create-users"),
     path("all-users/", UsersListview.as_view(), name="ctm_admin-all-users"),
 
     # Contact Messages

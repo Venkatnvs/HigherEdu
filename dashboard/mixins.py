@@ -4,6 +4,8 @@ from django.contrib import messages
 
 class CheckBasicAuthMixin(LoginRequiredMixin,UserPassesTestMixin):
     def test_func(self):
+        if self.request.user.is_staff:
+            return True
         if self.request.user.is_socialaccount:
             return self.request.user.is_completed
         return self.request.user.is_active
