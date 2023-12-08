@@ -20,6 +20,9 @@ def get_new_ad_refresh(request):
 class AdminADS(CheckAdminMixin,ListView):
     model = AdsBase
     template_name = 'ctm_admin/ads/ads_list-view.html'
+    model_permissions = {
+        'ads': ['view_adsbase']
+    }
 
 class AdsDetailView(CheckAdminMixin,DetailView):
     model = AdsBase
@@ -27,6 +30,9 @@ class AdsDetailView(CheckAdminMixin,DetailView):
     context_object_name = 'ad'
     slug_field = 'uuid'
     slug_url_kwarg = 'uuid'
+    model_permissions = {
+        'ads': ['view_adsbase']
+    }
 
 class AdsEditView(CheckAdminMixin,UpdateView):
     model = AdsBase
@@ -35,6 +41,9 @@ class AdsEditView(CheckAdminMixin,UpdateView):
     context_object_name = 'ad'
     slug_field = 'uuid'
     slug_url_kwarg = 'uuid'
+    model_permissions = {
+        'ads': ['change_adsbase']
+    }
 
     def get_success_url(self):
         return reverse_lazy('ctm_admin-ads_detail', kwargs={'uuid': self.object.uuid})
@@ -46,16 +55,25 @@ class AdsDeleteView(CheckAdminMixin,DeleteView):
     slug_field = 'uuid'
     slug_url_kwarg = 'uuid'
     success_url = reverse_lazy('ctm_admin-ads-list-view')
+    model_permissions = {
+        'ads': ['delete_adsbase']
+    }
 
 class AdsCreateView(CheckAdminMixin,CreateView):
     model = AdsBase
     form_class = AdsBaseForm
     template_name = 'ctm_admin/ads/ads_create.html'
     success_url = reverse_lazy('ctm_admin-ads-list-view')
+    model_permissions = {
+        'ads': ['add_adsbase']
+    }
 
 # Ad Size Crud views
 class AdsSize_List_Create(CheckAdminMixin,View):
     template_name = 'ctm_admin/ads/ads_size_list_create.html'
+    model_permissions = {
+        'ads': ['add_adssize','view_adssize']
+    }
 
     def get(self, request, *args, **kwargs):
         sizes = AdsSize.objects.all()
@@ -76,3 +94,6 @@ class AdsSizeDeleteView(CheckAdminMixin,DeleteView):
     template_name = 'ctm_admin/ads/ads_size_confirm_delete.html'
     context_object_name = 'size'
     success_url = reverse_lazy('ctm_admin-ads_size_list_create')
+    model_permissions = {
+        'ads': ['delete_adssize']
+    }

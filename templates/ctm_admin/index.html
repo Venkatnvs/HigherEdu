@@ -1,4 +1,5 @@
 {% extends 'ctm_admin/base/index.html' %}
+{% load cmutils %}
 
 {% block title %}
 Dashboard | {{site_name}} Admin
@@ -11,9 +12,11 @@ Dashboard | {{site_name}} Admin
         <div class="col-md-4">
             {% include 'ctm_admin/_details/get_dashboard_card.html' with title="User Registrations" count=user_count color="default" icon="fa-user-plus" %}
         </div>
+        {% if user|has_permissions:'utils.view_contactus' %}
         <div class="col-md-4">
             {% include 'ctm_admin/_details/get_dashboard_card.html' with title="Contacts Messages" count=contact_msg_count color="warning" icon="fa-comments" %}
         </div>
+        {% endif %}
         <div class="col-md-4"></div>
     </div>
     <div class="row justify-content-center d-flex">

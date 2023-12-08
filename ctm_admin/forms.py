@@ -1,5 +1,11 @@
 from django import forms
 from utils.models import ContactUs
+from accounts.models import UserType
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Permission
+
+User = get_user_model()
 
 class ContactUs_Msg_Form(forms.ModelForm):
     class Meta:
@@ -32,3 +38,31 @@ class ContactUs_Msg_Form(forms.ModelForm):
         if self.instance and self.cleaned_data['message'] != self.instance.message:
             raise forms.ValidationError("message cannot be edited.")
         return self.cleaned_data['message']
+
+class UserTypeForm(forms.ModelForm):
+    class Meta:
+        model = UserType
+        fields = ['name', 'permissions']
+
+    def __init__(self, *args, **kwargs):
+        super(UserTypeForm, self).__init__(*args, **kwargs)
+        allowed_apps = ['accounts', 'ads','utils','ctm_admin','applies']
+        app_permissions = Permission.objects.filter(content_type__app_label__in=allowed_apps)
+        permission_choices = [(perm.codename, f'{perm.content_type.app_label} - {perm.name} Data',perm.id) for perm in app_permissions]
+        self.fields['permissions'].choices = permission_choices
+        self.fields['permissions'].help_text = 'Select Multiple permissions to be Granted'
+        self.fields['name'].widget.attrs['placeholder'] = 'Enter Name of UserType (ex: SubAdmin..)'
+        self.fields['permissions'].widget.attrs['placeholder'] = 'Select all the permissions Granted'
+    
+class UserForm(UserCreationForm):
+    user_type = forms.ModelChoiceField(queryset=UserType.objects.all(), required=False)
+    class Meta:
+        model = User
+        fields = ['email','password1','password2','first_name','last_name','is_staff','user_type']
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.user_type = self.cleaned_data['user_type']
+            user.save()
+        return user
