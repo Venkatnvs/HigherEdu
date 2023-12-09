@@ -2,7 +2,7 @@ from django import forms
 from utils.models import ContactUs
 from accounts.models import UserType
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.contrib.auth.models import Permission
 
 User = get_user_model()
@@ -60,6 +60,20 @@ class UserForm(UserCreationForm):
         model = User
         fields = ['email','password1','password2','first_name','last_name','is_staff','user_type']
     
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.user_type = self.cleaned_data['user_type']
+            user.save()
+        return user
+
+class UserUpdateForm(forms.ModelForm):
+    user_type = forms.ModelChoiceField(queryset=UserType.objects.all(), required=False)
+
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'is_staff', 'user_type']
+
     def save(self, commit=True):
         user = super().save(commit=False)
         if commit:

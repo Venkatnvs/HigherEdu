@@ -16,6 +16,13 @@ urlpatterns = [
     path("create-users/", CreateUser.as_view(), name="ctm_admin-create-users"),
     path("all-users/", UsersListview.as_view(), name="ctm_admin-all-users"),
 
+    # Staff Users
+    path("staff-users/", StaffUserList.as_view(), name="ctm_admin-staff-users"),
+    path('staff-users/<int:pk>/', StaffUserDetails.as_view(), name='ctm_admin-staff-users-detail'),
+    path('staff-users/<int:pk>/edit/', StaffUserUpdateView.as_view(), name='ctm_admin-staff-users-edit'),
+    path('staff-users/<int:pk>/delete/', StaffUserDeleteView.as_view(), name='ctm_admin-staff-users-delete'),
+    path('staff-users/<int:pk>/change_password/', StaffUserChangePassword.as_view(), name='ctm_admin-staff-users-change_password'),
+
     # Contact Messages
     path("contactus/", ContactUsListview.as_view(), name="ctm_admin-contactus_list"),
     path('contactus/<int:pk>/', ContactUsDetailView.as_view(), name='ctm_admin-contactus_detail'),
