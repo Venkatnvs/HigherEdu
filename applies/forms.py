@@ -1,13 +1,8 @@
 from django import forms
-# from .models import ForeignLanguage, CompetitiveCourse
+from .models import ForeignLanguage, CompetitiveCourse
 
 class ApplyLanguagesForm(forms.Form):
-    LANGUAGES = [
-        ('german', 'German'),
-        ('french', 'French'),
-        ('japanese', 'Japanese'),
-        ('spanish', 'Spanish'),
-    ]
+    LANGUAGES = ForeignLanguage.objects.all().values_list('name', 'name')
 
     languages = forms.ChoiceField(
         choices=LANGUAGES,
@@ -15,12 +10,7 @@ class ApplyLanguagesForm(forms.Form):
     )
 
 class ApplyCoursesForm(forms.Form):
-    COURSES = [
-        ('gre', 'GRE / GMAT / CAT coaching'),
-        ('gate', 'GATE Coaching'),
-        ('upsc', 'Civil services (UPSC) IAS/IPS/IFS Coaching'),
-        ('ielts', 'IELTS (the International English Language Testing System)'),
-    ]
+    COURSES = CompetitiveCourse.objects.all().values_list('short_name', 'name')
 
     courses = forms.ChoiceField(
         choices=COURSES,
