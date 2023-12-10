@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden
 def check_admin(user, model_permissions):
     if user.is_superuser:
         return True
-    elif model_permissions and user.user_type:
+    elif model_permissions and user.user_type and user.is_staff:
         return all(
             all(
                 user.user_type.permissions.filter(

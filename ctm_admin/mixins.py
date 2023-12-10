@@ -7,7 +7,7 @@ class CheckAdminMixin(LoginRequiredMixin,UserPassesTestMixin):
     def test_func(self):
         if self.request.user.is_superuser:
             return True
-        elif self.model_permissions and self.request.user.user_type:
+        elif self.model_permissions and self.request.user.user_type and self.request.user.is_staff:
             return all(
                 all(
                     self.request.user.user_type.permissions.filter(

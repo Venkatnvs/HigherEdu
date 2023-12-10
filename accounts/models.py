@@ -38,6 +38,11 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta:
+        permissions = [
+            ("change_userpassword", "Can Change User Password"),
+        ]
+
     def __str__(self):
         return self.email
     

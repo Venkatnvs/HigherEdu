@@ -15,7 +15,7 @@ urlpatterns = [
     path('admin/', include('ctm_admin.urls')),
     path('ads/get_new_refresh',get_new_ad_refresh,name="ads-refresh"),
     path('utils/', include('utils.urls')),
-    path('study-abroad/', include('applies.urls')),
+    path('study/', include('applies.urls')),
     re_path(r'^favicon\.ico$', fav_icon),
 ]
 if settings.DEBUG :

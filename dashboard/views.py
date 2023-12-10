@@ -115,8 +115,13 @@ def TestPreparationPage(request):
 def AboutPage(request):
     return render(request,'dashboard/about/index.html')
 
+# Cost Of Studys
+
 def CostStudyUsa(request):
     return render(request, 'dashboard/cost_study/usa.html')
+
+def CostStudyAustralia(request):
+    return render(request, 'dashboard/cost_study/australia.html')
 
 
 from django.http import JsonResponse

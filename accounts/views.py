@@ -17,7 +17,7 @@ from allauth.account.signals import user_signed_up, email_confirmed
 from django.dispatch import receiver
 from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-from allauth.exceptions import ImmediateHttpResponse
+from allauth.core.exceptions import ImmediateHttpResponse
 
 User = get_user_model()
 

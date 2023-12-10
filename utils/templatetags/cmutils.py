@@ -19,7 +19,7 @@ def has_permissions(user, permissions_str):
     permissions = permissions_str.split(',')
     if user.is_superuser:
         return True
-    elif permissions and user.user_type:
+    elif permissions and user.user_type and user.is_staff:
         return all(
             user.user_type.permissions.filter(
                 content_type__app_label=permission.split('.')[0],
