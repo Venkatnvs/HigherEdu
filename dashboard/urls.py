@@ -14,6 +14,7 @@ urlpatterns = [
 
     # Cost Of Study
     path("cost-of-study/usa/", CostStudyUsa, name="cost-of-study-usa"),
+    path("cost-of-study/australia/", CostStudyAustralia, name="cost-of-study-australia"),
 
     # About Page
     path('about/',AboutPage,name="dashboard-about"),

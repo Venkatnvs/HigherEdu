@@ -22,11 +22,13 @@
               <i class="bi bi-circle"></i><span>All Users</span>
             </a>
           </li>
+          {% if user|has_permissions:'accounts.add_customuser' %}
           <li>
             <a href="{% url 'ctm_admin-create-users' %}">
               <i class="bi bi-circle"></i><span>Add Users</span>
             </a>
           </li>
+          {% endif %}
         </ul>
       </li>
       {% endif %}
@@ -49,11 +51,13 @@
               <i class="bi bi-circle"></i><span>Staff Users</span>
             </a>
           </li>
+          {% if user|has_permissions:'accounts.add_customuser' %}
           <li>
             <a href="{% url 'ctm_admin-create-users' %}">
               <i class="bi bi-circle"></i><span>Add Users</span>
             </a>
           </li>
+          {% endif %}
         </ul>
       </li>
       {% endif %}

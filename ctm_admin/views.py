@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
+from django.http import Http404
 from .mixins import CheckAdminMixin
 from .decorators import check_admin_required
 from django.views.generic import ListView, CreateView, UpdateView, DetailView,DeleteView
@@ -18,6 +19,7 @@ from django.urls import reverse,reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
+from .subapps.ads.models import AdsBase
 
 User = get_user_model()
 
@@ -29,11 +31,17 @@ model_permissions_main = {
 @check_admin_required(model_permissions=model_permissions_main)
 def Main(request):
     users = CustomUser.objects.filter(is_superuser=False,is_staff=False)
+    staffusers = CustomUser.objects.filter(is_superuser=False,is_staff=True)
+    ads = AdsBase.objects.filter(is_active=True)
+    ads_count = ads.count()
     user_count = users.count()
+    staffuser_count = staffusers.count()
     contact_msg_count = ContactUs.objects.filter(is_replyed=False).count()
     a,b= chart_view()
     context = {
         "user_count":user_count,
+        "ads_count":ads_count,
+        "staffuser_count":staffuser_count,
         "contact_msg_count":contact_msg_count,
         "graphs_1":json.dumps(a,cls=DjangoJSONEncoder),
         "graphs_2":json.dumps(b,cls=DjangoJSONEncoder),
@@ -45,7 +53,7 @@ class UsersListview(CheckAdminMixin,ListView):
     model = UserProfile
     template_name = 'ctm_admin/users/allusers_list.html'
     model_permissions = {
-        'accounts': ['view_customuser']
+        'accounts': ['view_customuser','view_userprofile']
     }
 
     def get_queryset(self):
@@ -70,13 +78,13 @@ class StaffUserDetails(CheckAdminMixin,DetailView):
     model_permissions = {
         'accounts': ['view_customuser']
     }
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         if user.is_superuser:
             return HttpResponse('User is Not a Staff user.')
         if not user.is_staff:
             return HttpResponse('User is Not a Staff user.')
-        return super().get(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 class StaffUserUpdateView(CheckAdminMixin,UpdateView):
     model = CustomUser
@@ -87,13 +95,13 @@ class StaffUserUpdateView(CheckAdminMixin,UpdateView):
     model_permissions = {
         'accounts': ['change_customuser']
     }
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         if user.is_superuser:
             return HttpResponse('User is Not a Staff user.')
         if not user.is_staff:
             return HttpResponse('User is Not a Staff user.')
-        return super().get(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
     
 class StaffUserDeleteView(CheckAdminMixin,DeleteView):
     model = CustomUser
@@ -119,6 +127,12 @@ class StaffUserChangePassword(CheckAdminMixin,PasswordChangeView):
     model_permissions = {
         'accounts': ['change_userpassword']
     }
+    def dispatch(self, request, *args, **kwargs):
+        user_id = self.kwargs.get('pk')
+        user = get_object_or_404(CustomUser, pk=user_id)
+        if user.is_superuser or not user.is_staff:
+            raise Http404("User is not a Staff user.")
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         response = super().form_valid(form)

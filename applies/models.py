@@ -38,3 +38,32 @@ class ApplyCourse(models.Model):
 
     def __str__(self):
         return f'{self.user} -- {self.course}'
+    
+class ForeignLanguage(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return self.name
+    
+class ForeignLanguageApplied(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    languages = models.ManyToManyField('ForeignLanguage',blank=True)
+
+    def __str__(self) -> str:
+        language_names = ', '.join(language.name for language in self.languages.all())
+        return f'{self.user} - {language_names}'
+    
+class CompetitiveCourse(models.Model):
+    name = models.CharField(max_length=200,unique=True)
+    short_name = models.CharField(max_length=100,unique=True)
+
+    def __str__(self) -> str:
+        return self.name
+    
+class CompetitiveCourseApplied(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    course = models.ManyToManyField('CompetitiveCourse',blank=True)
+
+    def __str__(self) -> str:
+        course_names = ', '.join(i.name for i in self.course.all())
+        return f'{self.user} - {course_names}'

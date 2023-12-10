@@ -74,6 +74,10 @@
 .text-default{
     color: #660076 !important;
 }
+.bg-default{
+  background: #5f016e !important;
+  color: #fff;
+}
 .border-default{
   border-color: #660076 !important;
 }
