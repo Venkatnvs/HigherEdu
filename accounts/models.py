@@ -50,6 +50,14 @@ class CustomUser(AbstractUser):
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
 
+    @property
+    def mobile_number(self):
+        return f'{self.userprofile.mobile_no}' if self.userprofile else ''
+    
+    @property
+    def gender(self):
+        return f'{self.userprofile.gender}' if self.userprofile else ''
+
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     gender = models.CharField(max_length=255, null=True, blank=True)

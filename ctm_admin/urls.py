@@ -35,4 +35,7 @@ urlpatterns = [
 
     # ADS System
     path("ads/",include('ctm_admin.subapps.ads.urls')),
+
+    # Applies Courses
+    path("applies/",include('ctm_admin.subapps.applies_adm.urls')),
 ]
