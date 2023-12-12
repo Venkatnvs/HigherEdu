@@ -52,7 +52,7 @@
             <h2>Study in {{i.country}}</h2>
             <p>{{i.description}}</p>
             <p>{{i.timeline | safe}}</p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
+            <a href="{% url 'applies-courses-apply' i.pk %}" class="btn btn-default-dark">Apply Now</a>
         </div>
         {% endfor %}
     </div>
