@@ -22,7 +22,7 @@ class ApplyForCourse(LoginRequiredMixin,View):
             return HttpResponseNotFound("Course not found. Try aganin!")
         av = av.first()
         context = {
-            "url_id":av.id
+            "av_course":av
         }
         return render(request, 'applies/bycnt/apply_form.html',context)
     
