@@ -97,3 +97,68 @@ class UpdatePassword(CheckBasicAuthMixin,View):
         user.save()
         messages.success(request,'Password updated successfully')
         return redirect('dashboard-update-password')
+
+# Services
+
+def CareerCounsellingPage(request):
+    return render(request,'dashboard/services/career-counselling.html')
+
+def ScholarshipPage(request):
+    return render(request,'dashboard/services/scholarship.html')
+
+def VisaAssistancePage(request):
+    return render(request,'dashboard/services/visa-assistance.html')
+
+def TestPreparationPage(request):
+    return render(request,'dashboard/services/test-preparation.html')
+
+def AboutPage(request):
+    return render(request,'dashboard/about/index.html')
+
+# Cost Of Studys
+
+def CostStudyUsa(request):
+    return render(request, 'dashboard/cost_study/usa.html')
+
+def CostStudyAustralia(request):
+    return render(request, 'dashboard/cost_study/australia.html')
+
+
+from django.http import JsonResponse
+import json
+def Test(request):
+    return render(request,'dashboard/test.html')
+def Test3(request):
+    return render(request,'dashboard/test3.html')
+def Test2(request):
+    return render(request,'dashboard/test2.html')
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def chat_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        user_message = data.get('user_message', '')
+        bot_reply = "You said: " + user_message
+        return JsonResponse({'reply_message': bot_reply})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+    
+
+# Courses
+
+def Gre_Gmat_CatPage(request):
+    return render(request, 'dashboard/courses/gre_gmat_cat.html')
+
+def GateCoachingPage(request):
+    return render(request, 'dashboard/courses/gate-coaching.html')
+
+def CivilServicesPage(request):
+    return render(request, 'dashboard/courses/civil-services-coaching.html')
+
+def IeltsCoachingPage(request):
+    return render(request, 'dashboard/courses/ielts-coaching.html')
+
+def ForeignLanguagesPage(request):
+    return render(request, 'dashboard/courses/foreign_languages.html')

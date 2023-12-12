@@ -1,0 +1,52 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load cmutils %}
+
+{% block title %}
+Visa Assistance | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<style>
+    .container-bd {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+    .container-bd p {
+        color: #4f4f4f;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row pt-3">
+    <h2
+        class="text-center bg-white shadow-sm py-1 bg-opacity-75 text-dark fw-bold border border-default border-2 rounded-pill">
+        VISA ASSISTANCE</h2>
+    <div class="container-bd mt-4 px-4">
+        <p>Embarking on a journey to study abroad involves several crucial steps, with visa processing being among the most important. Any oversight in this process can jeopardize all your other efforts. At {{site_name}}, our dedicated counselors are here to guide you through every step of the visa application process, ensuring a smooth and successful experience.</p>
+
+    <p>Our comprehensive visa assistance includes:</p>
+
+    <ul>
+        <li><strong>Visa Application Forms:</strong> Our counselors provide step-by-step guidance on filling in visa application forms, minimizing the chance of errors that could impact your application.</li>
+        <li><strong>Document Preparation:</strong> We assist you in gathering and organizing all necessary documents, ensuring they meet international standards and are submitted on time.</li>
+        <li><strong>Efficient Processing:</strong> Our visa application preparation staff works diligently to expedite the paperwork, saving you the hassle of hiring a skilled law firm or attorney.</li>
+        <li><strong>Timely Submission:</strong> We guarantee timely submission of your visa application to prevent any interference with your travel or employment plans.</li>
+        <li><strong>Mock Visa Interviews:</strong> Wherever required, we conduct mock visa interviews to give you a realistic experience, helping you prepare confidently for the actual visa interview.</li>
+    </ul>
+
+    <p>With years of experience and a high visa success rate, {{site_name}} is the preferred choice for students seeking reliable visa assistance. We understand the importance of a smooth visa process in realizing your dream of studying abroad. Once your visa is issued, we ensure timely delivery, allowing you to prepare for your move well in advance.</p>
+
+    <p>Trust us to make your international education journey seamless and stress-free.</p>
+
+    </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x400' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+      </div>
+</div>
+{% endblock content %}

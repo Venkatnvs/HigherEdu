@@ -5,6 +5,7 @@
           <a href="index.html" class="logo d-flex align-items-center">
             <span>{{site_name}}</span>
           </a>
+          <p>SKILLMITHRA ONLINE SERVICE LLP was incorporated in the year April 2017 and a leader in global education services, up skilling, re skilling and helping large student’s community to achieve their international education goals, internships and Placement opportunities.  </p>
           <p>We're on a big mission to teach everyone! Our goal is to help people everywhere learn new things. Join us on this exciting adventure as we make learning easy and fun. Together, let's explore and discover the amazing world of knowledge.</p>
           <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -18,7 +19,7 @@
           <h4>Useful Links</h4>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="#">About us</a></li>
+            <li><a href="{% url 'dashboard-about' %}">About us</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="{% url 'utils-terms-conds' %}">Terms of service</a></li>
             <li><a href="{% url 'utils-contact-us' %}">Contact Us</a></li>
@@ -26,22 +27,24 @@
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>Collaborate with Us</h4>
           <ul>
-            <li><a href="#">Career Counselling</a></li>
-            <li><a href="#">Application Process</a></li>
+            <li><a href="{% url 'utils-contact-us' %}">Advertise with Us</a></li>
+            <li><a href="#">Sponsorship</a></li>
             <li><a href="#">Scholarships</a></li>
-            <li><a href="#">Visa Assistance</a></li>
-            <li><a href="#">Test Preparation</a></li>
+            <li><a href="{% url 'courses-foreign-languages-coaching' %}">Foreign Languages</a></li>
+            <li><a href="{% url 'dashboard-profile' %}">Your Account</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
           <p>
-            Kumarswamy Layout<br>
-            Bangalore, KA 560078<br>
-            India <br><br>
+            SkillMithra Online Service LLP<br>
+            1460, 3rd Cross,<br>
+            Nanjundiah Layout, Begur Road<br>
+            BEGUR, Bengaluru - 560 068.<br>
+            Karnataka, INDIA.<br><br>
             <strong>Email:&nbsp;</strong><a class="mail_to_a" href="mailto:venkat@nvshome.tk">venkat@nvshome.tk</a></a><br>
           </p>
 

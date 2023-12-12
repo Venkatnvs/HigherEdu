@@ -38,12 +38,25 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta:
+        permissions = [
+            ("change_userpassword", "Can Change User Password"),
+        ]
+
     def __str__(self):
         return self.email
     
     @property
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
+
+    @property
+    def mobile_number(self):
+        return f'{self.userprofile.mobile_no}' if self.userprofile else ''
+    
+    @property
+    def gender(self):
+        return f'{self.userprofile.gender}' if self.userprofile else ''
 
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

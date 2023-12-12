@@ -1,0 +1,50 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load cmutils %}
+
+{% block title %}
+Civil Services Coaching  | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<style>
+    .container-bd {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+    .container-bd p {
+        color: #4f4f4f;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row pt-3">
+    <h2
+        class="text-center bg-white shadow-sm py-1 bg-opacity-75 text-dark fw-bold border border-default border-2 rounded-pill">
+        UPSC CIVIL SERVICES (IAS/IPS/IFS) COACHING</h2>
+        <div class="container-bd mt-4 px-4">
+            <p>Prepare for the UPSC Civil Services (IAS/IPS/IFS) exam with {{site_name}}'s comprehensive coaching. Our expert mentors and personalized approach will guide you on your journey to success.</p>
+        
+            <p>Benefit from specialized curricula tailored for the UPSC exam, interactive learning sessions, and access to advanced study materials. Our experienced faculty is dedicated to providing top-notch guidance and support.</p>
+            
+            <p>Engage in discussions and workshops to enhance your understanding of key concepts. Receive personalized feedback on your performance to track your progress effectively.</p>
+            
+            <p>At {{site_name}}, we understand the challenges of the UPSC exam. Choose us as your coaching partner to unlock your full potential and excel in the Civil Services (IAS/IPS/IFS) examination. <a href="{% url 'applies-apply_courses' %}">Enroll now</a> and embark on a successful journey towards a distinguished career!</p>
+        </div>
+    <div class="row mb-3">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <a href="{% url 'applies-apply_courses' %}" class="btn btn-default w-100">Apply Now</a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x400' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+    </div>
+</div>
+{% endblock content %}

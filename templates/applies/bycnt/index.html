@@ -47,60 +47,14 @@
 <div id="main-cc" class="container1 pt-3 px-5 pb-2">
 <h1 class="text-default fw-semibold text-center pb-2">Study Abroad</h1>
     <div class="box-container1">
+        {% for i in data %}
         <div class="box">
-            <h2>Study in Australia</h2>
-            <p>Upcomming Intake</p>
-            <p>Semester 1(Febrary Intake)- Oct- Nov
-                <br>Semester 2(July Intake)- April- May
-            </p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
+            <h2>Study in {{i.country}}</h2>
+            <p>{{i.description}}</p>
+            <p>{{i.timeline | safe}}</p>
+            <a href="{% url 'applies-courses-apply' i.pk %}" class="btn btn-default-dark">Apply Now</a>
         </div>
-
-        <div class="box">
-            <h2>Study in UK</h2>
-            <p>Upcomming Intake</p>
-            <p>Semester 1(Febrary Intake)- Oct- Nov
-                <br>Semester 2(July Intake)- April- May
-            </p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
-        </div>
-
-        <div class="box">
-            <h2>Study in USA</h2>
-            <p>Upcomming Intake</p>
-            <p>Semester 1(Febrary Intake)- Oct- Nov
-                <br>Semester 2(July Intake)- April- May
-            </p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
-        </div>
-
-        <div class="box">
-            <h2>Study in Canada</h2>
-            <p>Upcomming Intake</p>
-            <p>Semester 1(Febrary Intake)- Oct- Nov
-                <br>Semester 2(July Intake)- April- May
-            </p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
-        </div>
-
-        <div class="box">
-            <h2>Study in New Zealand</h2>
-            <p>Upcomming Intake</p>
-            <p>Semester 1(Febrary Intake)- Oct- Nov
-                <br>Semester 2(July Intake)- April- May
-            </p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
-        </div>
-
-        <div class="box">
-            <h2>Study in Ireland</h2>
-            <p>Upcomming Intake</p>
-            <p>Semester 1(Febrary Intake)- Oct- Nov
-            <br>Semester 2(July Intake)- April- May
-            </p>
-            <a href="#" class="btn btn-default-dark">Apply Now</a>
-        </div>
-
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}

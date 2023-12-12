@@ -1,0 +1,40 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load cmutils %}
+
+{% block title %}
+    Career Counseling | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<style>
+    .container-bd {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+    .container-bd p {
+        color: #4f4f4f;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="row pt-3">
+    <h2 class="text-center bg-white shadow-sm py-1 bg-opacity-75 text-dark fw-bold border border-default border-2 rounded-pill">CAREER COUNSELLING</h2>
+    <div class="container-bd mt-4 px-4">
+        <p>Our Career Counseling is like having a friendly guide on your journey to a successful future. We're here to help you figure out what you're good at, what you love, and how to turn that into a fantastic career.</p>
+    
+        <p>Our counselors work with you to explore your skills, interests, and dreams. Through fun activities and chats, we help you discover the perfect path for your studies and future job. We'll guide you on which courses and programs align with your goals and open up exciting opportunities.</p>
+        
+        <p>But we're not just about finding a job. We want to empower you to grow in your career, adapt to changes, and strike a balance between work and life. Our support goes beyond the classroom – it's about making your whole career journey fulfilling and successful.</p>
+        
+        <p>Whether you're just starting out, thinking of switching careers, or aiming to boost your current job, our Career Counseling is here to make sure you're on the right track. Let's turn your dreams into plans!</p>
+    </div>
+    <div class="row my-1 d-flex justify-content-center">
+        {{ad | GetAd_size:'500x400' | safe}}
+        {{ad | GetAd_size:'300x200' | safe}}
+      </div>
+</div>
+{% endblock content %}

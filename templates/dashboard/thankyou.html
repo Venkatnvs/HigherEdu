@@ -1,0 +1,35 @@
+{% load static %}
+{% load cmutils %}
+<div class="row">
+  <div class="col-md-10">
+    <section id="hero" class="hero">
+      <div class="container position-relative thanks_mn">
+        <div class="row gy-5" data-aos="fade-in">
+          <div class="col-lg-7 order-2 order-lg-1 d-flex flex-column justify-content-center text-center">
+            <h2 class="text-center">Thanks For Applying in {{site_name}}</h2>
+            <p>We will get in touch soon</p>
+            <div class="d-flex justify-content-evenly justify-content">
+              <a href="{% url 'dashboard-profile' %}" class="btn-get-started">Update Profile</a>
+              <a href="{% url 'utils-contact-us' %}" class="btn-get-started">Contact Us</a>
+            </div>
+          </div>
+          <div class="col-lg-5 order-1 order-lg-2 d-flex justify-content-center">
+            <img src="{% static 'main/img/thanks_page_logo.png' %}" class="img-fluid thanks_mn_img" alt="thanks_logo" data-aos="zoom-out" data-aos-delay="100">
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="d-flex justify-content-center row my-2">
+      {{ad | GetAd_size:'500x400' | safe}}
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="large-screen d-flex justify-content-center row my-2">
+      {{ad | GetAd_size:'300x600' | safe}}
+    </div>
+    <div class="d-flex justify-content-center row my-2">
+      {{ad | GetAd_size:'300x200' | safe}}
+    </div>
+  </div>
+</div>
+</div>

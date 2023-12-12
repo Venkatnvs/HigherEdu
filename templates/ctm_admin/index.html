@@ -1,4 +1,5 @@
 {% extends 'ctm_admin/base/index.html' %}
+{% load cmutils %}
 
 {% block title %}
 Dashboard | {{site_name}} Admin
@@ -11,8 +12,21 @@ Dashboard | {{site_name}} Admin
         <div class="col-md-4">
             {% include 'ctm_admin/_details/get_dashboard_card.html' with title="User Registrations" count=user_count color="default" icon="fa-user-plus" %}
         </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
+        {% if user|has_permissions:'accounts.view_customuser' %}
+        <div class="col-md-4">
+            {% include 'ctm_admin/_details/get_dashboard_card.html' with title="Staff Users" count=staffuser_count color="primary" icon="fa-user-gear" %}
+        </div>
+        {% endif %}
+        {% if user|has_permissions:'utils.view_contactus' %}
+        <div class="col-md-4">
+            {% include 'ctm_admin/_details/get_dashboard_card.html' with title="Contacts Messages" count=contact_msg_count color="warning" icon="fa-comments" %}
+        </div>
+        {% endif %}
+        {% if user|has_permissions:'ads.view_adsbase' %}
+        <div class="col-md-4">
+            {% include 'ctm_admin/_details/get_dashboard_card.html' with title="Active Ads" count=ads_count color="success" icon="fa-bullhorn" %}
+        </div>
+        {% endif %}
     </div>
     <div class="row justify-content-center d-flex">
         <div class="col-md-6">

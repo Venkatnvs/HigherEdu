@@ -3,25 +3,44 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="/" class="logo d-flex align-items-center">
-        <img src="{% static 'icons/logo.jpg' %}" alt="logo"/>
-        <span>{{site_name}}</span>
+        <img class="mx-0" src="{% static 'icons/favicon.png' %}" alt="logo"/>
+        <img style="margin-left:-10px" src="{% static 'icons/logo-white.png' %}" alt="logo"/>
+        <span class="d-none">{{site_name}}</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
+          <li class="dropdown"><a href="#"><span>Courses</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li class="dropdown"><a href="{% url 'courses-foreign-languages-coaching' %}"><span>Foreign language</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">German</a></li>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">French</a></li>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">Japanese</a></li>
+                  <li><a href="{% url 'courses-foreign-languages-coaching' %}">Spanish</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'courses-gre-gmat-cat-coaching' %}">GRE / GMAT / CAT</a></li>
+              <li><a href="{% url 'courses-gate-coaching' %}">GATE Coaching </a></li>
+              <li><a href="{% url 'courses-civil-services-coaching' %}">Civil services (UPSC) </a></li>
+              <li><a href="{% url 'courses-ielts-coaching' %}">IELTS</a></li>
+            </ul>
+          </li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Career Counselling</a></li>
-              <li><a href="#">Scholarships</a></li>
-              <li><a href="#">Visa Assistance</a></li>
-              <li><a href="#">Test Preparation</a></li>
+              <li><a href="{% url 'services-career-counselling' %}">Career Counselling</a></li>
+              <li><a href="{% url 'services-scholarships' %}">Scholarships</a></li>
+              <li><a href="{% url 'services-visa-assistance' %}">Visa Assistance</a></li>
+              <li><a href="{% url 'services-test-preparation' %}">Test Preparation</a></li>
               <li><a href="#">Application Process</a></li>
             </ul>
           </li>
-          <li><a class="nav-link" href="{% url 'applies-courses' %}">Study Abroad</a></li>
-          <li class="dropdown"><a href="{% url 'applies-courses' %}"><span>Cost of Study</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="{% url 'applies-courses' %}"><span>Study Abroad</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">usa</a></li>
+              <li><a class="nav-link" href="{% url 'applies-courses' %}">Courses</a></li>
+            <li class="dropdown"><a href="{% url 'applies-courses' %}"><span>Cost of Study</span> <i class="bi bi-chevron-right"></i></a>
+            <ul>
+              <li><a href="{% url 'cost-of-study-usa' %}">usa</a></li>
               <li class="dropdown"><a href="#"><span>Europe</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Ireland</a></li>
@@ -36,15 +55,17 @@
               <li><a href="#">New zealand</a></li>
               <li><a href="#">canada</a></li>
               <li><a href="#">Asia</a></li>
-              <li><a href="#">Australia</a></li>
+              <li><a href="{% url 'cost-of-study-australia' %}">Australia</a></li>
             </ul>
+            </li>
+          </ul>
           </li>
-          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="{% url 'dashboard-about' %}">About</a></li>
           <li><a class="nav-link" href="{% url 'utils-contact-us' %}">Contact</a></li>
           {% if request.user.is_authenticated %}
             {% include 'base/_details/profile_on_login.html' %}
           {% else %}
-            <li><a href="{% url 'accounts-login' %}" class="header_lr_btn_login btn btn-outline-light rounded-2 text-center">Login</a></li>
+            <li><a href="{% url 'accounts-login' %}" class="header_lr_btn_login btn btn-outline-light">Login</a></li>
             <li><a href="{% url 'accounts-register' %}" class="header_lr_btn_reg btn btn-light text-default">SignUp</a></li>
             {% endif %}
         </ul>

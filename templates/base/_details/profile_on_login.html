@@ -9,22 +9,23 @@
     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-0 m-0">
       <li class="dropdown-header">
         <span>{{request.user.full_name}}</span>
-        <h6>{{request.user.email}}</h6>
+        <h6 style="max-width:240px;overflow:hidden">{{request.user.email}}</h6>
       </li>
       <li>
         <hr class="dropdown-divider">
       </li>
-
+      {% if request.user.is_completed or request.user.is_staff %}
       <li>
         <a class="dropdown-item d-flex align-items-center" href="{% url 'dashboard-profile' %}">
           <i class="bi bi-gear"></i>
           <span>Account Settings</span>
         </a>
       </li>
+      {% endif %}
       <li>
         <hr class="dropdown-divider">
       </li>
-      {% if request.user.is_superuser %}
+      {% if request.user.is_staff %}
       <li>
         <a class="dropdown-item d-flex align-items-center" href="{% url 'ctm_admin-main' %}">
           <i class="bi bi-person-workspace"></i>

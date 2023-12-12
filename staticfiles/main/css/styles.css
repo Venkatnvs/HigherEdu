@@ -74,6 +74,20 @@
 .text-default{
     color: #660076 !important;
 }
+.bg-default{
+  background: #5f016e !important;
+  color: #fff;
+}
+.border-default{
+  border-color: #660076 !important;
+}
+.table-default{
+  --bs-table-color: #ffffff;
+  --bs-table-bg: #660076;
+  --bs-table-border-color: #660076;
+  color: var(--bs-table-color);
+  border-color: var(--bs-table-border-color);
+}
 .check_box_nvs{
     padding:10px;
     border-color:#b1b3b5;
@@ -134,6 +148,36 @@
     margin-left: 1rem;
     margin-right: 1rem;
 }
+/* ADs css */
+.btn-google {
+  color: #545454;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 1px #ddd;
+}
+.large-screen{
+  display: block;
+}
+.small-screen{
+  display: none;
+}
+#main > .container{
+  padding: 0px !important;
+}
+@media screen and (max-width: 600px) {
+  .large-screen{
+    display: none!important;
+  }
+  .small-screen{
+    display: flex;
+  }
+  #main > .container{
+    padding: 1px !important;
+  }
+  .check_box_nvs{
+    margin-right: 1px !important;
+  }
+}
+/* end ads css*/
 .header-nav a, .mail_to_a{
     color: #ffffff;
     text-decoration: none;
@@ -170,7 +214,7 @@
 .header .logo img {
   max-height: 40px;
   margin-right: 6px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .header .logo span {
@@ -463,6 +507,13 @@
 }
 .header_lr_btn_login{
   margin-left: 30px;
+}
+.header_lr_btn_login:hover{
+  color: #660076!important;
+}
+.header_lr_btn_reg:hover{
+  color: #ffffff!important;
+  background-color: #660076!important;
 }
 @media screen and (max-width: 900px) {
   .header_lr_btn_login{
