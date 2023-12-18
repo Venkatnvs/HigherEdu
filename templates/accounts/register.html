@@ -27,9 +27,6 @@
       <div class="row my-2 d-flex justify-content-center">
         {{ad | GetAd_size:'300x200' | safe}}
       </div>
-      <div class="row my-2 d-flex justify-content-center">
-        {{ad | GetAd_size:'300x200' | safe}}
-      </div>
     </div>
     <div class="row small-screen">
       <div class="col-md-8 justify-content-center">
@@ -92,9 +89,13 @@
       </div>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 border border-default">
+    <h6 class="text-center fw-bold my-1">Ads</h6>
     <div class="row my-1 d-flex justify-content-center">
       {{ad | GetAd_size:'300x600' | safe}}
+    </div>
+    <div class="row my-2 d-flex justify-content-center large-screen">
+      {{ad | GetAd_size:'300x200' | safe}}
     </div>
     <div class="row my-2 d-flex justify-content-center large-screen">
       {{ad | GetAd_size:'300x200' | safe}}
