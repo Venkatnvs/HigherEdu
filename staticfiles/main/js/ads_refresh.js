@@ -12,9 +12,8 @@ setInterval(function () {
         return response.json();
       })
       .then((newAdHtml) => {
-        console.log(newAdHtml)
         container.innerHTML = newAdHtml.new_ad_html;
       })
       .catch((error) => console.error(`Error refreshing ${size} ad:`, error));
   });
-}, 30000);
+}, 15000);
