@@ -123,6 +123,14 @@ def CostStudyUsa(request):
 def CostStudyAustralia(request):
     return render(request, 'dashboard/cost_study/australia.html')
 
+def CostStudyUk(request):
+    return render(request, 'dashboard/cost_study/uk.html')
+
+def CostStudyCanada(request):
+    return render(request, 'dashboard/cost_study/canada.html')
+
+def CostStudyNewZealand(request):
+    return render(request, 'dashboard/cost_study/new-zealand.html')
 
 from django.http import JsonResponse
 import json

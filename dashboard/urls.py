@@ -15,6 +15,9 @@ urlpatterns = [
     # Cost Of Study
     path("cost-of-study/usa/", CostStudyUsa, name="cost-of-study-usa"),
     path("cost-of-study/australia/", CostStudyAustralia, name="cost-of-study-australia"),
+    path("cost-of-study/uk/", CostStudyUk, name="cost-of-study-uk"),
+    path("cost-of-study/canada/", CostStudyCanada, name="cost-of-study-canada"),
+    path("cost-of-study/new-zealand/", CostStudyNewZealand, name="cost-of-study-new-zealand"),
 
     # About Page
     path('about/',AboutPage,name="dashboard-about"),
