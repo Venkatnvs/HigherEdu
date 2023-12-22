@@ -181,5 +181,8 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('EMAIL_FROM_EMAIL')
 
+# OpenAi Key
+OPENAI_API_KEY = config('OPENAI_API_KEY')
+
 # Custom Auth model
 AUTH_USER_MODEL="accounts.CustomUser"

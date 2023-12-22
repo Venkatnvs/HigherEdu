@@ -99,13 +99,17 @@
             </a>
           </li>
           {% endif %}
-          {% if user|has_permissions:'applies.view_foreignlanguageapplied' %}
-          <li>
-            <a href="{% url 'ctm_admin-foreign-languages-list' %}">
-              <i class="bi bi-circle"></i><span>German Language</span>
-            </a>
-          </li>
-          {% endif %}
+          {% for language in languages_sidebar_admin %}
+            {% with permission_name='applies.view_'|add:language.name|slugify|add:"_lang" %}
+              {% if user|has_permissions:permission_name %}
+                <li>
+                  <a href="{% url 'ctm_admin-foreign-languages-list-specific' language.name %}">
+                    <i class="bi bi-circle"></i><span>{{ language.name }} Language</span>
+                  </a>
+                </li>
+              {% endif %}
+            {% endwith %}
+          {% endfor %}
         </ul>
       </li>
       {% endif %}
@@ -123,13 +127,17 @@
             </a>
           </li>
           {% endif %}
-          {% if user|has_permissions:'applies.view_competitivecourseapplied' %}
-          <li>
-            <a href="{% url 'ctm_admin-competitive-courses-list' %}">
-              <i class="bi bi-circle"></i><span>Civil Services</span>
-            </a>
-          </li>
-          {% endif %}
+          {% for course in courses_sidebar_admin %}
+            {% with permission_name='applies.view_'|add:course.short_name|slugify|add:"_course" %}
+              {% if user|has_permissions:permission_name %}
+                <li>
+                  <a href="{% url 'ctm_admin-competitive-courses-list-specific' course.short_name %}">
+                    <i class="bi bi-circle"></i><span>{{ course.name }} Course</span>
+                  </a>
+                </li>
+              {% endif %}
+            {% endwith %}
+          {% endfor %}
         </ul>
       </li>
       {% endif %}

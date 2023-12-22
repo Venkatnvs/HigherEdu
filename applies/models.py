@@ -48,6 +48,16 @@ class ForeignLanguage(models.Model):
 class ForeignLanguageApplied(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     languages = models.ManyToManyField('ForeignLanguage',blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        permissions = [
+            ("view_german_lang", "Can view german language"),
+            ("view_french_lang", "Can view french language"),
+            ("view_japanese_lang", "Can view japanese language"),
+            ("view_spanish_lang", "Can view spanish language"),
+        ]
 
     def __str__(self) -> str:
         language_names = ', '.join(language.name for language in self.languages.all())
@@ -63,6 +73,16 @@ class CompetitiveCourse(models.Model):
 class CompetitiveCourseApplied(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     course = models.ManyToManyField('CompetitiveCourse',blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        permissions = [
+            ("view_gre_course", "Can view Gre course"),
+            ("view_gate_course", "Can view Gate course"),
+            ("view_upsc_course", "Can view Upsc course"),
+            ("view_ielts_course", "Can view Ielts course"),
+        ]
 
     def __str__(self) -> str:
         course_names = ', '.join(i.name for i in self.course.all())
