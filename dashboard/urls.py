@@ -9,7 +9,8 @@ urlpatterns = [
     # Test
     path('test/dsu/1', Test, name='dashboard-test' ),
     path('test/dsu/2', Test3, name='dashboard-test' ),
-    path('test2/', Test2, name='dashboard-test2' ),
+
+    # ChatBot
     path('chat/', chat_view, name='chat_view'),
 
     # Cost Of Study

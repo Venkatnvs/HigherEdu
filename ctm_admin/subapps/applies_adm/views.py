@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,get_object_or_404
 from django.urls import reverse,reverse_lazy
 from django.views.generic import ListView,UpdateView,DetailView,DeleteView,CreateView
 from ctm_admin.mixins import CheckAdminMixin
@@ -31,6 +31,60 @@ class AdminForeignLangList(CheckAdminMixin,ListView):
         context = super(AdminForeignLangList, self).get_context_data(**kwargs)
         context['filter']=self.request.GET.get('filter','')
         context['filter_av']=ForeignLanguage.objects.all()
+        return context
+
+class AdminForeignLangListSpecific(CheckAdminMixin,ListView):
+    model = ForeignLanguageApplied
+    context_object_name = 'languages'
+    template_name = 'ctm_admin/applies/foreign_lang/lang_listview_spe.html'
+
+    def get_model_permissions(self):
+        language_slug = self.kwargs['language_slug']
+        languages = ForeignLanguage.objects.filter(name=language_slug)
+        permissions = {
+            'applies': [f'view_{lang.name.lower().replace(" ", "_")}_lang' for lang in languages]
+        }
+        return permissions
+    
+    model_permissions = property(get_model_permissions)
+
+    def get_queryset(self):
+        language_slug = self.kwargs['language_slug']
+        language = get_object_or_404(ForeignLanguage, name=language_slug)
+        fl_app = ForeignLanguageApplied.objects.filter(languages=language).distinct()
+        return fl_app
+
+    def get_context_data(self, **kwargs):
+        context = super(AdminForeignLangListSpecific, self).get_context_data(**kwargs)
+        language_slug = self.kwargs['language_slug']
+        context['filter_language'] = get_object_or_404(ForeignLanguage, name=language_slug)
+        return context
+
+class AdminCompetitiveCoursesListSpecific(CheckAdminMixin,ListView):
+    model = CompetitiveCourseApplied
+    context_object_name = 'courses'
+    template_name = 'ctm_admin/applies/competitive_course/all_applies_list_spe.html'
+
+    def get_model_permissions(self):
+        course_slug = self.kwargs['course_slug']
+        courses = CompetitiveCourse.objects.filter(short_name=course_slug)
+        permissions = {
+            'applies': [f'view_{course.short_name.lower().replace(" ", "_")}_course' for course in courses]
+        }
+        return permissions
+    
+    model_permissions = property(get_model_permissions)
+
+    def get_queryset(self):
+        course_slug = self.kwargs['course_slug']
+        course = get_object_or_404(CompetitiveCourse, short_name=course_slug)
+        fl_app = CompetitiveCourseApplied.objects.filter(course=course).distinct()
+        return fl_app
+
+    def get_context_data(self, **kwargs):
+        context = super(AdminCompetitiveCoursesListSpecific, self).get_context_data(**kwargs)
+        course_slug = self.kwargs['course_slug']
+        context['filter_course'] = get_object_or_404(CompetitiveCourse, short_name=course_slug)
         return context
 
 class AdminCompetitiveCoursesList(CheckAdminMixin,ListView):

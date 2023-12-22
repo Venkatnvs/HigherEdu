@@ -8,6 +8,11 @@ from accounts.helpers import extract_first_last_name
 from django.contrib import messages
 from .mixins import CheckBasicAuthMixin
 from .decorators import check_basic_auth
+from openai import OpenAI
+import openai
+from django.conf import settings
+
+client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 @check_basic_auth
 def Home(request):
@@ -138,8 +143,6 @@ def Test(request):
     return render(request,'dashboard/test.html')
 def Test3(request):
     return render(request,'dashboard/test3.html')
-def Test2(request):
-    return render(request,'dashboard/test2.html')
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -148,7 +151,18 @@ def chat_view(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         user_message = data.get('user_message', '')
-        bot_reply = "You said: " + user_message
+        try:
+            completion = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a study abroad websites assistant"},
+                    {"role": "user", "content": f"{user_message}"}
+                ]
+            )
+            bot_reply = "Bot : " + completion.choices[0].message
+        except openai.RateLimitError as e:
+            print(e)
+            bot_reply = "Bot : " + user_message
         return JsonResponse({'reply_message': bot_reply})
     else:
         return JsonResponse({'error': 'Invalid request method'})
