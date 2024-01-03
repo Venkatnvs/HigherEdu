@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from decouple import config
 from django.contrib import messages
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -184,6 +183,9 @@ DEFAULT_FROM_EMAIL = config('EMAIL_FROM_EMAIL')
 
 # OpenAi Key
 OPENAI_API_KEY = config('OPENAI_API_KEY')
+
+# Google Api Key
+GOOGLE_API_KEY = config('GOOGLE_API_KEY')
 
 # Custom Auth model
 AUTH_USER_MODEL="accounts.CustomUser"
