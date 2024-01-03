@@ -11,8 +11,22 @@ from .decorators import check_basic_auth
 from openai import OpenAI
 import openai
 from django.conf import settings
+import google.generativeai as g_ai
 
+g_ai.configure(api_key=settings.GOOGLE_API_KEY)
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
+
+model = g_ai.GenerativeModel("gemini-pro")
+chat = model.start_chat(history=[
+    {
+        "role": "user",
+        "parts": "You only know about Study Abroad website called skillmithra and give answers in less than 60 words,And if asked other questions other than this topic replay i don't know"
+    },
+    {
+    "role": "model",
+    "parts": "ok, what details you want"
+    },
+])
 
 @check_basic_auth
 def Home(request):
@@ -146,23 +160,35 @@ def Test3(request):
 
 from django.views.decorators.csrf import csrf_exempt
 
+def chatgpt_chat(user_message):
+    try:
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a study abroad websites assistant"},
+                {"role": "user", "content": f"{user_message}"}
+            ]
+        )
+        return f"Bot : {completion.choices[0].message}"
+    except openai.RateLimitError as e:
+        print(e)
+        return f"Bot : {user_message}"
+    
+def gemini_chat(user_message):
+    try:
+        response = chat.send_message(user_message)
+        return response.text
+    except Exception as e:
+        print(e)
+        return "Invalid Query"
+
 @csrf_exempt
 def chat_view(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         user_message = data.get('user_message', '')
-        try:
-            completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a study abroad websites assistant"},
-                    {"role": "user", "content": f"{user_message}"}
-                ]
-            )
-            bot_reply = "Bot : " + completion.choices[0].message
-        except openai.RateLimitError as e:
-            print(e)
-            bot_reply = "Bot : " + user_message
+        # bot_reply = chatgpt_chat(user_message)
+        bot_reply = gemini_chat(user_message)
         return JsonResponse({'reply_message': bot_reply})
     else:
         return JsonResponse({'error': 'Invalid request method'})

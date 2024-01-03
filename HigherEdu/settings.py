@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from decouple import config
 from django.contrib import messages
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -97,10 +96,10 @@ WSGI_APPLICATION = 'HigherEdu.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('POSTGRESQL_URL'),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -184,6 +183,9 @@ DEFAULT_FROM_EMAIL = config('EMAIL_FROM_EMAIL')
 
 # OpenAi Key
 OPENAI_API_KEY = config('OPENAI_API_KEY')
+
+# Google Api Key
+GOOGLE_API_KEY = config('GOOGLE_API_KEY')
 
 # Custom Auth model
 AUTH_USER_MODEL="accounts.CustomUser"
