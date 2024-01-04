@@ -20,11 +20,11 @@ model = g_ai.GenerativeModel("gemini-pro")
 chat = model.start_chat(history=[
     {
         "role": "user",
-        "parts": "You only know about Study Abroad website called skillmithra and give answers in less than 60 words,And if asked other questions other than this topic replay i don't know"
+        "parts": "Exclusively inquire about the Study Abroad platform Skillmithra; I'll furnish detailed responses within a 60-word limit. For queries beyond this scope or unrelated topics, my knowledge is restricted. Ensure your questions pertain to Skillmithra for accurate and informative replies. Feel free to explore various aspects, features, or updates concerning the Skillmithra platform"
     },
     {
     "role": "model",
-    "parts": "ok, what details you want"
+    "parts": "ok i will only respond to inquire about the Study Abroad"
     },
 ])
 
