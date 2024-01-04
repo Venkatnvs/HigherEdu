@@ -8,7 +8,7 @@ Contact Us | {{site_name}}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
         <div class="d-flex justify-content-center">
             <img style="max-height: 230px;" class="img-fluid" src="{% static 'main/img/contact_page_logo.png' %}" alt="contact_us_logo">
         </div>
@@ -61,7 +61,7 @@ Contact Us | {{site_name}}
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="row my-1 d-flex justify-content-center border border-default">
         <h6 class="text-center fw-bold my-1">Ads</h6>
         {{ad | GetAd_size:'300x600' | safe}}
